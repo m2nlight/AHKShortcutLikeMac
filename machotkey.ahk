@@ -1,6 +1,6 @@
 ; Shortcuts like mac
 ; Written by Bob
-; http://bob-wei.cnblogs.com
+; http://www.cnblogs.com/Bob-wei/p/5316158.html
 ; Win+F1 to show HotkeyList
 
 ; Menu
@@ -38,7 +38,7 @@
 #+Down::Send +{PgDn}
 !+Left::Send +^{Left}
 !+Right::Send +^{Right}
-;View
+; View
 ^#F::Send {F11}
 #=::Send ^{WheelUp}
 #-::Send ^{WheelDown}
@@ -60,6 +60,12 @@ F1::WinSet, AlwaysOnTop, Toggle, A
 #F12::Send {Volume_Up}
 #+Backspace::EmptyBin()
 #+!Backspace::EmptyBin(true)
+; Explorer
+#IfWinActive ahk_class CabinetWClass
+#O::Send {Enter}
+#Up::Send !{Up}
+#Down::Send {Enter}
+#IfWinActive
 
 ; software
 #8::RunOrActivate("cmd.exe")
@@ -88,14 +94,14 @@ RunOrActivate(Program, isActivate=true)
   }
 }
 
-EmptyBin(isSlient=false)
+EmptyBin(isNoConfirm=false)
 {
   ;SHERB_NOCONFIRMATION = 0x000001;
   ;SHERB_NOPROGRESSUI = 0x000002;
   ;SHERB_NOSOUND = 0x000004;
   dwFlags = 0x00
-  if(isSlient) {
-    dwFlags = 0x07
+  if(isNoConfirm) {
+    dwFlags = 0x01
   }
   DllCall("Shell32\SHEmptyRecycleBin", "Ptr", hwnd, "Ptr", NULL, "UInt", dwFlags)
 }
@@ -107,5 +113,3 @@ HideOtherWindow()
   Sleep,200
   WinRestore, %curtitle%
 }
-
-
