@@ -69,7 +69,7 @@ F1::WinSet, AlwaysOnTop, Toggle, A
 
 ; software
 #8::RunOrActivate("cmd.exe")
-#9::RunOrActivate("D:\Bob\tools\CCleaner\CCleaner.exe")
+#9::RunOrActivate("bash.exe")
 !Space::
     RunOrActivate("D:\Bob\tools\ListaryPortable\Listary.exe", false)
     Send {LCtrl}{LCtrl}
