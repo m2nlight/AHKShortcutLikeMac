@@ -2,8 +2,33 @@
 ; Written by Bob
 ; http://www.cnblogs.com/Bob-wei/p/5316158.html
 ; Win+F1 to show HotkeyList
+; CapsLock+KEY to custom hotkey
 
-; Menu
+; ## custom ##
+; special key
+PgUp::Send {Volume_Up}
+PgDn::Send {Volume_Down}
+ScrollLock::Send {Volume_Mute}
+F1::WinSet, AlwaysOnTop, Toggle, A
+#F1::ListHotkeys
+#LAlt::Send #x
+CapsLock & Enter::Send {End}{Enter}
+; normal key
+CapsLock & F1::Send {F1}
+CapsLock & PgUp::Send {PgUp}
+CapsLock & PgDn::Send {PgDn}
+CapsLock & ScrollLock::Send {ScrollLock}
+; run key
+CapsLock & 7::RunOrActivate("C:\MinGW\t\CCleaner\CCleaner.exe")
+CapsLock & 8::RunOrActivate("cmd.exe")
+CapsLock & 9::RunOrActivate("bash.exe")
+CapsLock & 0::RunOrActivate("C:\MinGW\t\Everything\Everything.exe")
+LAlt & Space::
+    RunOrActivate("C:\MinGW\t\ListaryPortable\Listary.exe", false)
+    Send {LCtrl}{LCtrl}
+Return
+
+; ## Menu ##
 #H::WinMinimize, A
 +#H::HideOtherWindow()
 #Q::Send !{F4}
@@ -43,10 +68,6 @@
 #=::Send ^{WheelUp}
 #-::Send ^{WheelDown}
 #0::Send ^0
-;Special shortkey for Windows
-F1::WinSet, AlwaysOnTop, Toggle, A
-#F1::ListHotkeys
-#LAlt::Send #x
 ; Finder
 #Backspace::Send {Del}
 +#3::Send {PrintScreen}
@@ -67,19 +88,7 @@ F1::WinSet, AlwaysOnTop, Toggle, A
 #Down::Send {Enter}
 #IfWinActive
 
-; software
-#8::RunOrActivate("cmd.exe")
-#9::RunOrActivate("bash.exe")
-!Space::
-    RunOrActivate("D:\Bob\tools\ListaryPortable\Listary.exe", false)
-    Send {LCtrl}{LCtrl}
-Return
-!#Space::
-    RunOrActivate("D:\Bob\tools\Everything\Everything.exe", false)
-    Send #\
-Return
-
-; functions
+; ## functions ##
 RunOrActivate(Program, isActivate=true)
 {
   SplitPath, Program, ExeFile
