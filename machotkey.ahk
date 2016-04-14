@@ -1,32 +1,9 @@
 ; Shortcuts like mac
 ; Written by Bob
 ; http://www.cnblogs.com/Bob-wei/p/5316158.html
-; Win+F1 to show HotkeyList
-; CapsLock+KEY to custom hotkey
 
-; ## custom ##
-; special key
-PgUp::Send {Volume_Up}
-PgDn::Send {Volume_Down}
-ScrollLock::Send {Volume_Mute}
-F1::WinSet, AlwaysOnTop, Toggle, A
+; Win+F1 to show HotkeyList
 #F1::ListHotkeys
-#LAlt::Send #x
-CapsLock & Enter::Send {End}{Enter}
-; normal key
-CapsLock & F1::Send {F1}
-CapsLock & PgUp::Send {PgUp}
-CapsLock & PgDn::Send {PgDn}
-CapsLock & ScrollLock::Send {ScrollLock}
-; run key
-CapsLock & 7::RunOrActivate("C:\MinGW\t\CCleaner\CCleaner.exe")
-CapsLock & 8::RunOrActivate("cmd.exe")
-CapsLock & 9::RunOrActivate("bash.exe")
-CapsLock & 0::RunOrActivate("C:\MinGW\t\Everything\Everything.exe")
-LAlt & Space::
-    RunOrActivate("C:\MinGW\t\ListaryPortable\Listary.exe", false)
-    Send {LCtrl}{LCtrl}
-Return
 
 ; ## Menu ##
 #H::WinMinimize, A
@@ -87,6 +64,61 @@ Return
 #Up::Send !{Up}
 #Down::Send {Enter}
 #IfWinActive
+
+; ## custom ##
+; special key
+#LAlt::Send #x
+PgUp::Send {Volume_Up}
+PgDn::Send {Volume_Down}
+ScrollLock::Send {Volume_Mute}
+; capslock+key
+CapsLock & Enter::Send {End}{Enter}
+CapsLock & RShift::Send {Home}{Enter}
+CapsLock & Space::SendInput {space}{space}{space}{space}
+CapsLock & Backspace::Send +{Home}{Backspace}
+CapsLock & Delete::Send +{End}{Backspace}
+CapsLock & 4::Send {End}     ; VIM: SHIFT+$
+CapsLock & 6::Send {Home}    ; VIM: SHIFT+^
+CapsLock & G::Send ^{End}    ; VIM: SHIFT+G
+CapsLock & T::Send ^{Home}   ; VIM: gg
+CapsLock & H::Send {Left}    ; VIM: h
+CapsLock & J::Send {Down}    ; VIM: j
+CapsLock & K::Send {Up}      ; VIM: k
+CapsLock & L::Send {Right}   ; VIM: l
+CapsLock & N::Send {Down}    ; VIM: CTRL+N
+CapsLock & P::Send {Up}      ; VIM: CTRL+P
+; normal key
+CapsLock & PgUp::Send {PgUp}
+CapsLock & PgDn::Send {PgDn}
+CapsLock & ScrollLock::Send {ScrollLock}
+; function key
+CapsLock & F1::WinSet, AlwaysOnTop, Toggle, A
+CapsLock & F7::RunOrActivate("C:\MinGW\t\CCleaner\CCleaner.exe")
+CapsLock & F8::RunOrActivate("C:\MinGW\t\Everything\Everything.exe")
+CapsLock & F9::RunOrActivate("bash.exe")
+CapsLock & F10::RunOrActivate("cmd.exe")
+LAlt & Space::
+  RunOrActivate("C:\MinGW\t\ListaryPortable\Listary.exe", false)
+  Send {LCtrl}{LCtrl}
+Return
+
+; ## Hotstrings ##
+:*:]date::
+  FormatTime, CurrentDateTime,, yyyy-M-d
+  SendInput %CurrentDateTime%
+return
+:*:]time::
+  FormatTime, CurrentDateTime,, HH:mm:ss
+  SendInput %CurrentDateTime%
+return
+:*:]now::
+  FormatTime, CurrentDateTime,, yyyy-M-d HH:mm:ss
+  SendInput %CurrentDateTime%
+return
+:*:]longdate::
+  FormatTime, CurrentDateTime,, LongDate
+  SendInput %CurrentDateTime%
+return
 
 ; ## functions ##
 RunOrActivate(Program, isActivate=true)
