@@ -94,7 +94,7 @@ CapsLock & ScrollLock::Send {ScrollLock}
 ; function key
 CapsLock & F1::WinSet, AlwaysOnTop, Toggle, A
 CapsLock & F7::RunOrActivate("C:\MinGW\t\CCleaner\CCleaner.exe")
-CapsLock & F8::RunOrActivate("C:\MinGW\t\Everything\Everything.exe")
+CapsLock & F8::RunOrActivate("C:\MinGW\t\Everything\Everything.exe",,"The Everything is running. `n`nPress Win+`` to Show it.")
 CapsLock & F9::RunOrActivate("bash.exe")
 CapsLock & F10::RunOrActivate("cmd.exe")
 LAlt & Space::
@@ -121,13 +121,15 @@ return
 return
 
 ; ## functions ##
-RunOrActivate(Program, isActivate=true)
+RunOrActivate(Program, isActivate=true, msg="")
 {
   SplitPath, Program, ExeFile
   Process, Exist, %ExeFile%
   PID = %ErrorLevel%
   if (PID = 0) {
     Run, %Program%
+  } else if (StrLen(msg)>0) {
+    MsgBox ,0,AHK,%msg%,3
   }
   if (isActivate)
   {
