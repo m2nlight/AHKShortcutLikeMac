@@ -23,6 +23,10 @@
 #X::Send ^x
 #C::Send ^c
 #V::Send ^v
+!+#V::
+  clipboard = %clipboard%
+  Send ^v
+return
 #A::Send ^a
 #F::Send ^f
 #G::Send {F3}
@@ -67,37 +71,54 @@
 
 ; ## custom ##
 ; special key
-#LAlt::Send #x
-PgUp::Send {Volume_Up}
-PgDn::Send {Volume_Down}
-ScrollLock::Send {Volume_Mute}
+AppsKey::Send #x      ; Show WinX menu in win10
+PgUp::Send {Volume_Up}            ; Volume Up
+PgDn::Send {Volume_Down}          ; Volume Down
+ScrollLock::Send {Volume_Mute}    ; Volume Mute
 ; capslock+key
-CapsLock & Enter::Send {End}{Enter}
-CapsLock & RShift::Send {Home}{Enter}
-CapsLock & Space::SendInput {space}{space}{space}{space}
-CapsLock & Backspace::Send +{Home}{Backspace}
-CapsLock & Delete::Send +{End}{Backspace}
-CapsLock & 4::Send {End}     ; VIM: SHIFT+$
-CapsLock & 6::Send {Home}    ; VIM: SHIFT+^
-CapsLock & G::Send ^{End}    ; VIM: SHIFT+G
-CapsLock & T::Send ^{Home}   ; VIM: gg
-CapsLock & H::Send {Left}    ; VIM: h
-CapsLock & J::Send {Down}    ; VIM: j
-CapsLock & K::Send {Up}      ; VIM: k
-CapsLock & L::Send {Right}   ; VIM: l
-CapsLock & N::Send {Down}    ; VIM: CTRL+N
-CapsLock & P::Send {Up}      ; VIM: CTRL+P
+CapsLock & Enter::Send {End}{Enter}        ; Start new line
+CapsLock & \::Send {Home}{Enter}{Up}       ; Start new line at previous line
+CapsLock & RShift::Send {Enter}{Left}      ; Line split
+CapsLock & LShift::Send {End}{Delete}      ; Line join
+CapsLock & Space::SendInput {space}{space}{space}{space}    ; Input 4 space
+CapsLock & Backspace::Send +{Home}{Backspace}    ; Delete to line begin
+CapsLock & Delete::Send +{End}{Backspace}        ; Delete to line end
+CapsLock & D::Send {Home}+{End}^c{End}{Enter}^v{Home}       ; Duplicate line
+CapsLock & A::Send {Home}+{End}      ; Selected current line
+CapsLock & C::Send {End}+{Home}^c    ; Selected and Copy current line
+CapsLock & X::Send {End}+{Home}^x{Delete}         ; Cut current line
+CapsLock & V::Send {Home}{Enter}{Up}^v            ; Paste to current line
+CapsLock & Insert::                               ; Paste plain text
+  clipboard = %clipboard%
+  Send ^v
+return
+CapsLock & Left::Send +{Left}    ; same to SHIFT+LEFT
+CapsLock & Down::Send +{Down}    ; same to SHIFT+DOWN
+CapsLock & Up::Send +{Up}        ; same to SHIFT+UP
+CapsLock & Right::Send +{Right}  ; same to SHIFT+RIGHT
+CapsLock & 4::Send {End}     ; Move to line end (VIM: SHIFT+$)
+CapsLock & 6::Send {Home}    ; Move to line begin (VIM: SHIFT+^)
+CapsLock & G::Send ^{End}    ; Move to document end (VIM: SHIFT+G}
+CapsLock & T::Send ^{Home}   ; Move to document begin (VIM: gg)
+CapsLock & H::Send {Left}    ; Move left (VIM: h)
+CapsLock & J::Send {Down}    ; Move down (VIM: j)
+CapsLock & K::Send {Up}      ; Move up (VIM: k)
+CapsLock & L::Send {Right}   ; Move right (VIM: l)
+CapsLock & N::Send {Down}    ; Move down too (VIM: CTRL+N)
+CapsLock & P::Send {Up}      ; Move up too (VIM: CTRL+P)
 ; normal key
-CapsLock & PgUp::Send {PgUp}
-CapsLock & PgDn::Send {PgDn}
-CapsLock & ScrollLock::Send {ScrollLock}
+CapsLock & PgUp::Send {PgUp}    ; PageDown
+CapsLock & PgDn::Send {PgDn}    ; PageUp
+CapsLock & ScrollLock::Send {ScrollLock}    ; ScrollLock
 ; function key
-CapsLock & F1::WinSet, AlwaysOnTop, Toggle, A
-CapsLock & F7::RunOrActivate("C:\MinGW\t\CCleaner\CCleaner.exe")
-CapsLock & F8::RunOrActivate("C:\MinGW\t\Everything\Everything.exe",,"The Everything is running. `n`nPress Win+`` to Show it.")
-CapsLock & F9::RunOrActivate("bash.exe")
-CapsLock & F10::RunOrActivate("cmd.exe")
-LAlt & Space::
+CapsLock & F1::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
+CapsLock & F7::RunOrActivate("C:\MinGW\t\CCleaner\CCleaner.exe")    ; run cclearner.exe
+CapsLock & F8::    ; Run Everything. Please change "Toggle window Hotkey" to Win+` in Everything Options
+  RunOrActivate("C:\MinGW\t\Everything\Everything.exe",,"The Everything is running. `n`nPress Win+`` to Show it.")
+return
+CapsLock & F9::RunOrActivate("bash.exe")    ; Run bash for win10 build 14316
+CapsLock & F10::RunOrActivate("cmd.exe")    ; Run cmd
+LAlt & Space::    ; Run Listary or show/hide listary inputbox. Please use Listary v5.00 and Double-Ctrl hotkey is enabled.
   RunOrActivate("C:\MinGW\t\ListaryPortable\Listary.exe", false)
   Send {LCtrl}{LCtrl}
 Return
