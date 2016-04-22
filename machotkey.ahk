@@ -109,6 +109,8 @@ CapsLock & Insert::                               ; Paste plain text
 return
 ; left alt + key
 LAlt & V::Send ^v{Enter}          ; paste and go
+LAlt & C::Send +{End}^c           ; copy to line end
+LAlt & X::Send +{End}^x           ; cut to line end
 LAlt & Space::    ; Run Listary or show/hide listary inputbox. Please use Listary v5.00 and Double-Ctrl hotkey is enabled.
   RunOrActivate("C:\MinGW\t\ListaryPortable\Listary.exe", false)
   Send {LCtrl}{LCtrl}
