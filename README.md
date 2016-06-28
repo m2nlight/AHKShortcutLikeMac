@@ -20,3 +20,5 @@ Script Features:
 Tips:
 * Start computer autorun: You can complited it to an execute file by [Ahk2Exe](https://www.autohotkey.com/download/ahk2exe.zip), then create a shortcut file into Startup Menu(Win10: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`).
 * Shortcuts mapping at Virual Mathine(XP ~ win10) on mac.
+* Has <WIN> key conflict when AHK meet StartIsBack++. A suggest uninstalling StartIsBack++ then install Start10 or not.
+
