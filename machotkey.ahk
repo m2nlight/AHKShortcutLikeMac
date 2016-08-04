@@ -112,14 +112,14 @@ LAlt & V::Send ^v{Enter}          ; paste and go
 LAlt & C::Send +{End}^c           ; copy to line end
 LAlt & X::Send +{End}^x           ; cut to line end
 LAlt & Space::    ; Run Listary or show/hide listary inputbox. Please use Listary v5.00 and Double-Ctrl hotkey is enabled.
-  RunOrActivate("C:\MinGW\t\ListaryPortable\Listary.exe", false)
+  RunOrActivate("C:\Program Files\Listary\Listary.exe", false)
   Send {LCtrl}{LCtrl}
 Return
 ; function key
 CapsLock & F1::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
-CapsLock & F7::RunOrActivate("C:\MinGW\t\CCleaner\CCleaner.exe")    ; run cclearner.exe
+CapsLock & F7::RunOrActivate("C:\Tools\CCleaner\CCleaner.exe")    ; run cclearner.exe
 CapsLock & F8::    ; Run Everything. Please change "Toggle window Hotkey" to Win+` in Everything Options
-  RunOrActivate("C:\MinGW\t\Everything\Everything.exe",,"The Everything is running. `n`nPress Win+`` to Show it.")
+  RunOrActivate("C:\Tools\Everything\Everything.exe",,"The Everything is running. `n`nPress Win+`` to Show it.")
 return
 CapsLock & F9::RunOrActivate("bash.exe")    ; Run bash for win10 build 14316
 CapsLock & F10::RunOrActivate("cmd.exe")    ; Run cmd
