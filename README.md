@@ -11,8 +11,6 @@ Script Features:
 * Some macOS shortcuts (e.g. `win+q`, `win+h`, `win+s`, `win+c/x/v`, `alt+win+shift+v`, `win+backspace`, `win+shift+backspace`, `win+i`...)
 * More shortcuts:
 
-
-
 	| HotKeys                 | Desc                                                                     |
 	| ---                     | ---                                                                      |
 	| __CapsLock+ shortcuts__ |                                                                          |
@@ -33,10 +31,8 @@ Script Features:
 	| __Function Key__        |                                                                          |
 	| `CapsLock+F1`           | Toggle window topmost.                                                   |
 	| `CapsLock+F10/F9`       | Start a cmd.exe/git-sh in current explorer path.                         |
-	| __Start software_       |                                                                          |
 	| `LAlt+space`            | Call Listary, need you modify this ahk script to configure Listary path. |
-
-
+	| and more...             |                                                                          |
 
 * Hot string (e.g. `]date`, `]time`, `]now`, `]longdate`)
 * `Win+F1` show hotkeys list window.
