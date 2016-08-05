@@ -71,7 +71,7 @@ return
 
 ; ## custom ##
 ; special key
-AppsKey::Send #x                  ; Show WinX menu in win10
+LWin & Alt::Send #x               ; Show WinX menu in win10
 PgUp::Send {Volume_Up}            ; Volume Up
 PgDn::Send {Volume_Down}          ; Volume Down
 ScrollLock::Send {Volume_Mute}    ; Volume Mute
@@ -80,7 +80,7 @@ CapsLock & PgUp::Send {PgUp}    ; PageDown
 CapsLock & PgDn::Send {PgDn}    ; PageUp
 CapsLock & ScrollLock::Send {ScrollLock}    ; ScrollLock
 ; capslock + key
-CapsLock & Space::SendInput {space}{space}{space}{space}    ; Input 4 space
+CapsLock & Space::SendInput {Space 4}    ; Input 4 space
 CapsLock & Left::Send +{Left}    ; same to SHIFT+LEFT
 CapsLock & Down::Send +{Down}    ; same to SHIFT+DOWN
 CapsLock & Up::Send +{Up}        ; same to SHIFT+UP
@@ -113,7 +113,7 @@ LAlt & C::Send +{End}^c           ; copy to line end
 LAlt & X::Send +{End}^x           ; cut to line end
 LAlt & Space::    ; Run Listary or show/hide listary inputbox. Please use Listary v5.00 and Double-Ctrl hotkey is enabled.
   RunOrActivate("C:\Program Files\Listary\Listary.exe", false)
-  Send {LCtrl}{LCtrl}
+  Send {Ctrl 2}
 Return
 ; function key
 CapsLock & F1::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
