@@ -121,8 +121,8 @@ CapsLock & F7::RunOrActivate("C:\Tools\CCleaner\CCleaner.exe")    ; run cclearne
 CapsLock & F8::    ; Run Everything. Please change "Toggle window Hotkey" to Win+` in Everything Options
   RunOrActivate("C:\Tools\Everything\Everything.exe",,"The Everything is running. `n`nPress Win+`` to Show it.")
 return
-CapsLock & F9::RunOrActivate("bash.exe")    ; Run bash for win10 build 14316
-CapsLock & F10::RunOrActivate("cmd.exe")    ; Run cmd
+CapsLock & F9::RunCmd("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
+CapsLock & F10::RunCmd("")    ; Run cmd
 
 ; ## Hotstrings ##
 :*:]date::
@@ -143,6 +143,12 @@ return
 return
 
 ; ## functions ##
+RunCmd(command)
+{
+  curPath := CurrentPath()
+  Run %comspec% /K "cd /d "%curPath%" & %command%"
+}
+
 RunOrActivate(Program, isActivate=true, msg="")
 {
   SplitPath, Program, ExeFile
@@ -177,4 +183,46 @@ HideOtherWindow()
   Send #m
   Sleep,200
   WinRestore, %curtitle%
+}
+
+CurrentPath()
+{
+  url := GetCurrentExplorerURL(true)
+  if (url)
+    return ConvertExplorerURLToPath(url)
+  return A_Desktop
+}
+
+GetCurrentExplorerURL(getLastWhenNoFound=false)
+{
+  WinGet, curhwnd, ID, A
+  for pExp in ComObjCreate("Shell.Application").Windows
+  {
+    if (pExp.FullName = "C:\WINDOWS\EXPLORER.EXE") {
+      if (pExp.hwnd = curhwnd) {
+        return pExp.LocationURL
+      }
+      if(StrLen(pExp.LocationURL)> 0) {
+        last := pExp.LocationURL
+      }
+    }
+  }
+  if(getLastWhenNoFound and last) {
+    return last
+  }
+}
+
+ConvertExplorerURLToPath(url)
+{
+  If !url
+    Return ""
+  path := url
+  path := RegExReplace(path, "ftp://.*@","ftp://")
+  StringReplace, path, path, file:///
+  StringReplace, path, path, /, \, All
+  Loop
+    If RegExMatch(path, "i)(?<=%)[\da-f]{1,2}", hex)
+      StringReplace, path, path, `%%hex%, % Chr("0x" . hex), All
+    Else Break
+  Return path 
 }
