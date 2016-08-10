@@ -117,12 +117,16 @@ LAlt & Space::    ; Run Listary or show/hide listary inputbox. Please use Listar
 Return
 ; function key
 CapsLock & F1::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
-CapsLock & F7::RunOrActivate("C:\Tools\CCleaner\CCleaner.exe")    ; run cclearner.exe
 CapsLock & F8::    ; Run Everything. Please change "Toggle window Hotkey" to Win+` in Everything Options
   RunOrActivate("C:\Tools\Everything\Everything.exe",,"The Everything is running. `n`nPress Win+`` to Show it.")
 return
-CapsLock & F9::RunCmd("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
+CapsLock & F9::                 ; Run PowerShell
+  curPath := CurrentPath()
+  Run powershell.exe -NoExit "cd %curPath%"
+return
 CapsLock & F10::RunCmd("")    ; Run cmd
+CapsLock & F11::RunCmd("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
+CapsLock & F12::RunCmd("C:\msys64\msys2_shell.bat")    ; Run msys2 shell
 
 ; ## Hotstrings ##
 :*:]date::
