@@ -122,7 +122,7 @@ CapsLock & F8::    ; Run Everything. Please change "Toggle window Hotkey" to Win
 return
 CapsLock & F9::                 ; Run PowerShell
   curPath := CurrentPath()
-  Run powershell.exe -NoExit "cd %curPath%"
+  Run powershell.exe -NoExit "cd \"%curPath%\""
 return
 CapsLock & F10::RunCmd("")    ; Run cmd
 CapsLock & F11::RunCmd("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
