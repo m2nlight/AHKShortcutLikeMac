@@ -12,7 +12,7 @@ v1.1.24.02 downloads
 * [Help](https://www.autohotkey.com/download/1.1/AutoHotkeyHelp.zip)
 
 Script Features:
-* Some macOS shortcuts (e.g. `win+q`, `win+h`, `win+s`, `win+c/x/v`, `alt+win+shift+v`, `win+backspace`, `win+shift+backspace`, `win+i`...)
+* Some macOS shortcuts (e.g. `win+q`, `win+w`, `win+h`, `win+s`, `win+c/x/v`, `alt+win+shift+v`, `win+backspace`, `win+shift+backspace`, `win+i`...)
 * Other shortcuts:
 
 	| HotKeys                 | Desc                                                                          |
@@ -26,16 +26,16 @@ Script Features:
 	| `CapsLock+a`            | Selected current line.                                                        |
 	| `CapsLock+c/x/v`        | Copy/Cut/PasteAt current line.                                                |
 	| `CapsLock+Insert`       | Paste as text.                                                                |
-	| __LAlt+ shortcuts__     |                                                                               |
+	| __LAlt+ shortcuts__     | LAlt means left alt key.                                                      |
 	| `LAlt+c/x`              | Copy/Cut to line end.                                                         |
 	| `LAlt+v`                | paste and go/enter.                                                           |
 	| __Special Key__         |                                                                               |
 	| `LWin+Alt`              | WinX menus in Win10                                                           |
-	| `PageUp/PageDown`       | Volume up/down                                                                |
+	| `PageUp/PageDown`       | Volume up/down, you can edit this ahk script to disable it.                   |
 	| __Function Key__        |                                                                               |
 	| `CapsLock+F1`           | Toggle window topmost.                                                        |
 	| `CapsLock+F9~F12`       | F9:PowerShell, F10:CMD, F11:git-sh in current explorer path. F12:MSYS2-Shell. |
-	| `LAlt+space`            | Call Listary, need you modify this ahk script to configure Listary path.      |
+	| `LAlt+space`            | Call Listary, need you edit this ahk script to configure Listary path.        |
 	| and more...             |                                                                               |
 
 * Hot string (e.g. `]date`, `]time`, `]now`, `]longdate`)
