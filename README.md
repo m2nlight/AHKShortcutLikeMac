@@ -8,7 +8,7 @@ AutoHotKey v2 is alpha-release. Suggest use v1.1.24.02
 ```
 v1.1.24.02 downloads
 * [AutoHotkey Portable](https://www.autohotkey.com/download/1.1/AutoHotkey_1.1.24.02.zip)
-* [AutoHotkey_Setup](https://www.autohotkey.com/download/1.1/AutoHotkey112401_ansi.zip)
+* [AutoHotkey_Setup](https://www.autohotkey.com/download/1.1/AutoHotkey_1.1.24.02_setup.exe)
 * [Help](https://www.autohotkey.com/download/1.1/AutoHotkeyHelp.zip)
 
 Script Features:
