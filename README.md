@@ -2,10 +2,14 @@
 An AHK Script for using keyboard shortcuts like MacOS on your Windows
 
 
-Need software:
-* AutoHotKey [Github](https://github.com/Lexikos/AutoHotkey_L/)
-* AutoHotKey [Download](https://www.autohotkey.com/download/)
-
+Required: **AutoHotKey** [_HomePage_](https://www.autohotkey.com/) [_Github_](https://github.com/Lexikos/AutoHotkey_L/)
+```
+AutoHotKey v2 is alpha-release. Suggest use v1.1.24.02
+```
+v1.1.24.02 downloads
+* [AutoHotkey Portable](https://www.autohotkey.com/download/1.1/AutoHotkey_1.1.24.02.zip)
+* [AutoHotkey_Setup](https://www.autohotkey.com/download/1.1/AutoHotkey112401_ansi.zip)
+* [Help](https://www.autohotkey.com/download/1.1/AutoHotkeyHelp.zip)
 
 Script Features:
 * Some macOS shortcuts (e.g. `win+q`, `win+h`, `win+s`, `win+c/x/v`, `alt+win+shift+v`, `win+backspace`, `win+shift+backspace`, `win+i`...)
@@ -39,7 +43,7 @@ Script Features:
 
 
 Tips:
-* Autorun: You can complited it to an execute file by [Ahk2Exe](https://www.autohotkey.com/download/ahk2exe.zip), then create a shortcut file into Startup Menu(Win10: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`).
+* Autorun: You can complited it to an execute file by **Ahk2Exe**, then create a shortcut file into Startup Menu(Win10: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`).
 * Shortcuts mapping at Virual Mathine(XP ~ win10) on mac.
-* Has `WIN` key conflict when AHK meet StartIsBack++. A suggest uninstalling StartIsBack++ then install Start10 or not.
+* Has `WIN` key conflict when AHK with StartIsBack++. A suggest replace StartIsBack++ with Start10, or use system start.
 
