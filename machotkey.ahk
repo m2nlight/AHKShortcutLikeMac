@@ -2,8 +2,8 @@
 ; Written by Bob
 ; http://www.cnblogs.com/Bob-wei/p/5316158.html
 
-; Win+F1 to show HotkeyList
-#F1::ListHotkeys
+; ## WinX ##
+#F1::Send #x    ; Show WinX menu in win10
 
 ; ## Menu ##
 #H::WinMinimize, A
@@ -71,14 +71,13 @@ return
 
 ; ## custom ##
 ; special key
-LWin & Alt::Send #x               ; Show WinX menu in win10
-PgUp::Send {Volume_Up}            ; Volume Up
-PgDn::Send {Volume_Down}          ; Volume Down
-ScrollLock::Send {Volume_Mute}    ; Volume Mute
+;PgUp::Send {Volume_Up}            ; Volume Up
+;PgDn::Send {Volume_Down}          ; Volume Down
+;ScrollLock::Send {Volume_Mute}    ; Volume Mute
 ; normal key
-CapsLock & PgUp::Send {PgUp}    ; PageDown
-CapsLock & PgDn::Send {PgDn}    ; PageUp
-CapsLock & ScrollLock::Send {ScrollLock}    ; ScrollLock
+;CapsLock & PgUp::Send {PgUp}    ; PageDown
+;CapsLock & PgDn::Send {PgDn}    ; PageUp
+;CapsLock & ScrollLock::Send {ScrollLock}    ; ScrollLock
 ; capslock + key
 CapsLock & Space::SendInput {Space 4}    ; Input 4 space
 CapsLock & Left::Send +{Left}    ; same to SHIFT+LEFT
@@ -111,22 +110,24 @@ return
 LAlt & V::Send ^v{Enter}          ; paste and go
 LAlt & C::Send +{End}^c           ; copy to line end
 LAlt & X::Send +{End}^x           ; cut to line end
-LAlt & Space::    ; Run Listary or show/hide listary inputbox. Please use Listary v5.00 and Double-Ctrl hotkey is enabled.
-  RunOrActivate("C:\Program Files\Listary\Listary.exe", false)
-  Send {Ctrl 2}
-Return
 ; function key
-CapsLock & F1::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
-CapsLock & F8::    ; Run Everything. Please change "Toggle window Hotkey" to Win+` in Everything Options
-  RunOrActivate("C:\Tools\Everything\Everything.exe",,"The Everything is running. `n`nPress Win+`` to Show it.")
+CapsLock & F1::
+  title=CapsLock + {Fn}
+  msg=CapsLock + {Fn}: `n`nF1 - Show this.`nF2 - Toogle always on top.`nF3 - `nF4 - Run Lingoes.`n`nF5 - `nF6 - `nF7 - Run Listary.`nF8 - Run Everything.`n`nF9 - Run Powershell.`nF10 - Run CMD.`nF11 - Run Git shell.`nF12 - Show ListHotKeys window.
+  MsgBox ,,%title%,%msg%,
 return
+CapsLock & F2::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
+CapsLock & F4::Run "C:\Program Files\Lingoes\Translator2\Lingoes64.exe"    ; Run Lingoes64
+CapsLock & F7::Run "C:\Program Files\Listary\Listary.exe"    ; Run Listary
+CapsLock & F8::Run "C:\Tools\Everything\Everything.exe"    ; Run Everything
 CapsLock & F9::                 ; Run PowerShell
   curPath := CurrentPath()
   Run powershell.exe -NoExit "cd \"%curPath%\""
 return
 CapsLock & F10::RunCmd("")    ; Run cmd
 CapsLock & F11::RunCmd("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
-CapsLock & F12::RunCmd("C:\msys64\msys2_shell.bat")    ; Run msys2 shell
+;CapsLock & F12::RunCmd("C:\msys64\msys2_shell.bat")    ; Run msys2 shell
+CapsLock & F12::ListHotkeys    ; Show ListHotKeys window.
 
 ; ## Hotstrings ##
 :*:]date::
