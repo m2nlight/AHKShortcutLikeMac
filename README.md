@@ -4,7 +4,7 @@ An AHK Script for using keyboard shortcuts like MacOS on your Windows
 
 Required: **AutoHotKey** [_HomePage_](https://www.autohotkey.com/) [_Github_](https://github.com/Lexikos/AutoHotkey_L/)
 ```
-AutoHotKey v2 is alpha-release. Suggest use v1.1.24.02
+AutoHotKey v2 is alpha-release. Suggest use v1.1.*
 ```
 v1.1.26.01 downloads
 * [AutoHotkey Portable](https://www.autohotkey.com/download/1.1/AutoHotkey_1.1.26.01.zip)
@@ -33,7 +33,6 @@ Script Features:
 	| `CapsLock+F1`           | Show CapsLock+Fn prompt.                                                      |
 	| `CapsLock+F2`           | Toggle window topmost.                                                        |
 	| `CapsLock+F9~F12`       | F9:PowerShell, F10:CMD, F11:git-sh in current explorer path. F12:ListHotkeys. |
-	| `LAlt+space`            | Call Listary, need you edit this ahk script to configure Listary path.        |
 	| and more...             |                                                                               |
 
 * Hot string (e.g. `]date`, `]time`, `]now`, `]longdate`)
