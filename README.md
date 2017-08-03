@@ -33,13 +33,14 @@ Script Features:
 	| `LWin+Alt`              | WinX menus in Win10                                                           |
 	| `PageUp/PageDown`       | Volume up/down, you can edit this ahk script to disable it.                   |
 	| __Function Key__        |                                                                               |
-	| `CapsLock+F1`           | Toggle window topmost.                                                        |
-	| `CapsLock+F9~F12`       | F9:PowerShell, F10:CMD, F11:git-sh in current explorer path. F12:MSYS2-Shell. |
+	| `CapsLock+F1`           | Show CapsLock+Fn prompt.                                                      |
+	| `CapsLock+F2`           | Toggle window topmost.                                                        |
+	| `CapsLock+F9~F12`       | F9:PowerShell, F10:CMD, F11:git-sh in current explorer path. F12:ListHotkeys. |
 	| `LAlt+space`            | Call Listary, need you edit this ahk script to configure Listary path.        |
 	| and more...             |                                                                               |
 
 * Hot string (e.g. `]date`, `]time`, `]now`, `]longdate`)
-* `Win+F1` show hotkeys list window.
+* `Win+F1` show WinX menu in win10.
 
 
 Tips:
