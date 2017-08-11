@@ -74,16 +74,15 @@ return
 ;PgUp::Send {Volume_Up}            ; Volume Up
 ;PgDn::Send {Volume_Down}          ; Volume Down
 ;ScrollLock::Send {Volume_Mute}    ; Volume Mute
-; normal key
 ;CapsLock & PgUp::Send {PgUp}    ; PageDown
 ;CapsLock & PgDn::Send {PgDn}    ; PageUp
 ;CapsLock & ScrollLock::Send {ScrollLock}    ; ScrollLock
+CapsLock & Left::Send #{Left}    ; WIN+LEFT
+CapsLock & Down::Send #{Down}    ; WIN+DOWN
+CapsLock & Up::Send #{Up}        ; WIN+UP
+CapsLock & Right::Send #{Right}  ; WIN+RIGHT
 ; capslock + key
 CapsLock & Space::SendInput {Space 4}    ; Input 4 space
-CapsLock & Left::Send +{Left}    ; same to SHIFT+LEFT
-CapsLock & Down::Send +{Down}    ; same to SHIFT+DOWN
-CapsLock & Up::Send +{Up}        ; same to SHIFT+UP
-CapsLock & Right::Send +{Right}  ; same to SHIFT+RIGHT
 CapsLock & H::Send {Left}        ; Move left (VIM: h)
 CapsLock & J::Send {Down}        ; Move down (VIM: j)
 CapsLock & K::Send {Up}          ; Move up (VIM: k)
