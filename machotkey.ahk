@@ -2,6 +2,7 @@
 ; Written by Bob
 ; http://www.cnblogs.com/Bob-wei/p/5316158.html
 
+#MaxHotkeysPerInterval 2000
 ; ## WinX ##
 #F1::Send #x    ; Show WinX menu in win10
 
@@ -145,6 +146,23 @@ return
   FormatTime, CurrentDateTime,, LongDate
   SendInput %CurrentDateTime%
 return
+
+; ## Mouse ##
+WheelUP::
+Send {WheelDown}
+Return
+
+WheelDown::
+Send {WheelUp}
+Return
+
+WheelLeft::
+Send {WheelRight}
+Return
+
+WheelRight::
+Send {WheelLeft}
+Return
 
 ; ## functions ##
 RunCmd(command)
