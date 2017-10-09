@@ -124,7 +124,7 @@ CapsLock & F9::                 ; Run PowerShell
   curPath := CurrentPath()
   Run powershell.exe -NoExit "cd \"%curPath%\""
 return
-CapsLock & F10::RunCmd("")    ; Run cmd
+CapsLock & F10::RunCmd("ver")    ; Run cmd
 CapsLock & F11::RunCmd("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
 ;CapsLock & F12::RunCmd("C:\msys64\msys2_shell.bat")    ; Run msys2 shell
 CapsLock & F12::ListHotkeys    ; Show ListHotKeys window.
