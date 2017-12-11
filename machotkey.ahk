@@ -1,10 +1,11 @@
 ; Shortcuts like mac
 ; Written by Bob
-; http://www.cnblogs.com/Bob-wei/p/5316158.html
+; https://github.com/m2nlight/AHKShortcutLikeMac
 
 #MaxHotkeysPerInterval 2000
-; ## WinX ##
+; ## Special Key ##
 #F1::Send #x    ; Show WinX menu in win10
+#F2::Send #r    ; Show run dialog
 
 ; ## Menu ##
 #H::WinMinimize, A
@@ -50,6 +51,7 @@ return
 #=::Send ^{WheelUp}
 #-::Send ^{WheelDown}
 #0::Send ^0
+#R::Send ^r
 ; Finder
 #Backspace::Send {Del}
 +#3::Send {PrintScreen}
@@ -71,13 +73,6 @@ return
 #IfWinActive
 
 ; ## custom ##
-; special key
-;PgUp::Send {Volume_Up}            ; Volume Up
-;PgDn::Send {Volume_Down}          ; Volume Down
-;ScrollLock::Send {Volume_Mute}    ; Volume Mute
-;CapsLock & PgUp::Send {PgUp}    ; PageDown
-;CapsLock & PgDn::Send {PgDn}    ; PageUp
-;CapsLock & ScrollLock::Send {ScrollLock}    ; ScrollLock
 CapsLock & Left::Send #{Left}    ; WIN+LEFT
 CapsLock & Down::Send #{Down}    ; WIN+DOWN
 CapsLock & Up::Send #{Up}        ; WIN+UP
@@ -113,7 +108,7 @@ LAlt & X::Send +{End}^x           ; cut to line end
 ; function key
 CapsLock & F1::
   title=CapsLock + {Fn}
-  msg=CapsLock + {Fn}: `n`nF1 - Show this.`nF2 - Toogle always on top.`nF3 - `nF4 - Run Lingoes.`n`nF5 - `nF6 - `nF7 - Run Listary.`nF8 - Run Everything.`n`nF9 - Run Powershell.`nF10 - Run CMD.`nF11 - Run Git shell.`nF12 - Show ListHotKeys window.
+  msg=CapsLock + {Fn}: `n`nF1 - Show this.`nF2 - Toogle always on top.`nF3 - `nF4 - Run Lingoes.`n`nF5 - `nF6 - `nF7 - Run Listary.`nF8 - Run Everything.`n`nF9 - Run Powershell.`nF10 - Run CMD.`nF11 - Run Git shell.`nF12 - Run Bash shell(WSL).`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.
   MsgBox ,,%title%,%msg%,
 return
 CapsLock & F2::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
@@ -125,9 +120,10 @@ CapsLock & F9::                 ; Run PowerShell
   Run powershell.exe -NoExit "cd \"%curPath%\""
 return
 CapsLock & F10::RunCmd("ver")    ; Run cmd
-CapsLock & F11::RunCmd("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
+CapsLock & F11::RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
 ;CapsLock & F12::RunCmd("C:\msys64\msys2_shell.bat")    ; Run msys2 shell
-CapsLock & F12::ListHotkeys    ; Show ListHotKeys window.
+;CapsLock & F12::ListHotkeys    ; Show ListHotKeys window.
+CapsLock & F12::RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell
 
 ; ## Hotstrings ##
 :*:]date::
@@ -169,6 +165,12 @@ RunCmd(command)
 {
   curPath := CurrentPath()
   Run %comspec% /K "cd /d "%curPath%" & %command%"
+}
+
+RunCmdAndClose(command)
+{
+  curPath := CurrentPath()
+  Run %comspec% /C "cd /d "%curPath%" & %command%"
 }
 
 RunOrActivate(Program, isActivate=true, msg="")
