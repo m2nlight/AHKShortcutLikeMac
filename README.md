@@ -13,7 +13,7 @@ v1.1.26.01 downloads
 
 Script Features:
 * Some macOS shortcuts (e.g. `win+q`, `win+w`, `win+h`, `win+r`, `win+s`, `win+c/x/v`, `alt+win+shift+v`, `win+backspace`, `win+shift+backspace`, `win+i`...)
-* Other shortcuts:
+* Shortcuts table:
 
 	| HotKeys                 | Desc                                                                          |
 	| ---                     | ---                                                                           |
@@ -51,9 +51,9 @@ Script Features:
 	| `Win+Shift+4`           | Capture actived window to clipboard                                           |
 	| `Win+F3`                | Show desktop                                                                  |
 	| `Win+I`                 | Show file/folder property dialog (Alt+Enter)                                  |
-	| `Win+10`                | Mute                                                                          |
-	| `Win+11`                | Volume down                                                                   |
-	| `Win+12`                | Volume up                                                                     |
+	| `Win+F10`               | Mute                                                                          |
+	| `Win+F11`               | Volume down                                                                   |
+	| `Win+F12`               | Volume up                                                                     |
 	| `Win+Shift+Backspace`   | Empty Recycle Bin                                                             |
 	| `Win+Shift+Alt+Backspace`| Empty Recycle Bin without prompt                                             |
 	| __CapsLock+ shortcuts__ |                                                                               |
