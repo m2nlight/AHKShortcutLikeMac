@@ -66,10 +66,20 @@ return
 #+Backspace::EmptyBin()
 #+!Backspace::EmptyBin(true)
 ; Explorer
-#IfWinActive ahk_class CabinetWClass
+#If ActiveControlIsOfClass("SysListView32")
 #O::Send {Enter}
 #Up::Send !{Up}
 #Down::Send {Enter}
+Enter::Send {F2}
+#If
+
+#IfWinActive ahk_class CabinetWClass
+#If ActiveControlIsOfClass("DirectUIHWND")
+#O::Send {Enter}
+#Up::Send !{Up}
+#Down::Send {Enter}
+Enter::Send {F2}
+#If
 #IfWinActive
 
 ; ## custom ##
@@ -249,4 +259,16 @@ ConvertExplorerURLToPath(url)
       StringReplace, path, path, `%%hex%, % Chr("0x" . hex), All
     Else Break
   Return path 
+}
+
+ActiveControlIs(Control) {  
+    ControlGetFocus, FocusedControl, A  
+    return (FocusedControl=Control)  
+}  
+
+ActiveControlIsOfClass(Class) {  
+    ControlGetFocus, FocusedControl, A  
+    ControlGet, FocusedControlHwnd, Hwnd,, %FocusedControl%, A  
+    WinGetClass, FocusedControlClass, ahk_id %FocusedControlHwnd%  
+    return (FocusedControlClass=Class)  
 }

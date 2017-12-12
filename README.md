@@ -12,7 +12,7 @@ v1.1.26.01 downloads
 * [Help](https://www.autohotkey.com/download/1.1/AutoHotkeyHelp.zip)
 
 Script Features:
-* Some macOS shortcuts (e.g. `win+q`, `win+w`, `win+h`, `win+r`, `win+s`, `win+c/x/v`, `alt+win+shift+v`, `win+backspace`, `win+shift+backspace`, `win+i`...)
+* Hot string (e.g. `]date`, `]time`, `]now`, `]longdate`)
 * Shortcuts table:
 
 	| HotKeys                 | Desc                                                                          |
@@ -56,6 +56,11 @@ Script Features:
 	| `Win+F12`               | Volume up                                                                     |
 	| `Win+Shift+Backspace`   | Empty Recycle Bin                                                             |
 	| `Win+Shift+Alt+Backspace`| Empty Recycle Bin without prompt                                             |
+	| __Explorer shortcuts__  |                                                                               |
+	| `Enter`                 | Rename (F2)                                                                   |
+	| `Win+O`                 | Open (Enter)                                                                  |
+	| `Win+Up`                | Up to                                                                         |
+	| `Win+Down`              | Open (Enter) same to `Win+O`                                                  |
 	| __CapsLock+ shortcuts__ |                                                                               |
 	| `CapsLock+Space`        | Input 4 spaces.                                                               |
 	| `CapsLock+Backspace`    | Delete to line head.                                                          |
@@ -80,8 +85,13 @@ Script Features:
 	| `Win+F2`                | Show Windows run dialog                                                       |
 	| and more...             |                                                                               |
 
-* Hot string (e.g. `]date`, `]time`, `]now`, `]longdate`)
-* `Win+F1` show WinX menu in win10.
+
+Known Issue:
+* `CapsLock+F12` to show bash shell, only support U64 mode.
+
+Thanks: 
+* [@g1084164986](https://github.com/g1084164986) - Mouse direction support.
+* [@liuyukuan](http://blog.csdn.net/liuyukuan/article/details/53885184) - Explorer rename support by his `ActiveControlIsOfClass` code.
 
 
 Tips:
