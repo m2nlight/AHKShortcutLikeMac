@@ -57,7 +57,7 @@ Script Features:
 	| `Win+Shift+Backspace`   | Empty Recycle Bin                                                             |
 	| `Win+Shift+Alt+Backspace`| Empty Recycle Bin without prompt                                             |
 	| __Explorer shortcuts__  |                                                                               |
-	| `Enter`                 | Rename (F2)                                                                   |
+	| `Win+Enter`             | Rename (F2)                                                                   |
 	| `Win+O`                 | Open (Enter)                                                                  |
 	| `Win+Up`                | Up to                                                                         |
 	| `Win+Down`              | Open (Enter) same to `Win+O`                                                  |

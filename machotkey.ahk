@@ -70,7 +70,8 @@ return
 #O::Send {Enter}
 #Up::Send !{Up}
 #Down::Send {Enter}
-Enter::Send {F2}
+#Enter::Send {F2}
+;NumpadEnter::Send {F2}
 #If
 
 #IfWinActive ahk_class CabinetWClass
@@ -78,7 +79,8 @@ Enter::Send {F2}
 #O::Send {Enter}
 #Up::Send !{Up}
 #Down::Send {Enter}
-Enter::Send {F2}
+#Enter::Send {F2}
+;NumpadEnter::Send {F2}
 #If
 #IfWinActive
 
