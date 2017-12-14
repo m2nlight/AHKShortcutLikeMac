@@ -51,7 +51,7 @@ return
 #=::Send ^{WheelUp}
 #-::Send ^{WheelDown}
 #0::Send ^0
-#R::Send ^r
+#R::Send {F5}
 ; Finder
 #Backspace::Send {Del}
 +#3::Send {PrintScreen}
