@@ -97,5 +97,4 @@ Thanks:
 Tips:
 * Autorun: You can complited it to an execute file by **Ahk2Exe**, then create a shortcut file into Startup Menu(Win10: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`).
 * Shortcuts mapping at Virual Mathine(XP ~ win10) on mac.
-* ~~Has `WIN` key conflict when AHK with StartIsBack++. A suggest replace StartIsBack++ with Start10, or use system start.~~ Try newest StartIsBack++.
-
+* [QuickLook](https://github.com/xupefei/QuickLook) is alike MacOS Quick-Look tool, press `Space` to preview some file in the Explorer.
