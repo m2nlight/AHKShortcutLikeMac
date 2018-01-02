@@ -60,7 +60,7 @@ Script Features:
 	| <kbd>Win</kbd>+<kbd>Enter</kbd>             | Rename (F2)                                                                   |
 	| <kbd>Win</kbd>+<kbd>O</kbd>                 | Open (Enter)                                                                  |
 	| <kbd>Win</kbd>+<kbd>Up</kbd>                | Up to                                                                         |
-	| <kbd>Win</kbd>+<kbd>Down</kbd>              | Open (Enter) same to <kbd>Win</kbd> O`                                                  |
+	| <kbd>Win</kbd>+<kbd>Down</kbd>              | Open (Enter) same to `Win+O`                                                  |
 	| __CapsLock+ shortcuts__ |                                                                               |
 	| <kbd>CapsLock</kbd>+<kbd>Space</kbd>        | Input 4 spaces.                                                               |
 	| <kbd>CapsLock</kbd>+<kbd>Backspace</kbd>    | Delete to line head.                                                          |
@@ -78,7 +78,7 @@ Script Features:
 	| <kbd>CapsLock</kbd>+<kbd>F2</kbd>           | Toggle window topmost.                                                        |
 	| <kbd>CapsLock</kbd>+<kbd>F9</kbd>           | PowerShell in current explorer path                                           |
 	| <kbd>CapsLock</kbd>+<kbd>F10</kbd>          | CMD in current explorer path                                                  |
-	| <kbd>CapsLock</kbd>+<kbd>F11</kbd>          | Git (http://www.git-scm.com/download/win) in current explorer path            |
+	| <kbd>CapsLock</kbd>+<kbd>F11</kbd>          | [Git](http://www.git-scm.com/download/win) in current explorer path            |
 	| <kbd>CapsLock</kbd>+<kbd>F12</kbd>          | Bash (Win10 WSL) in current explorer path                                     |
 	| __Special Key__         |                                                                               |
 	| <kbd>Win</kbd>+<kbd>F1</kbd>                | Show Windows WinX Menus                                                       |
