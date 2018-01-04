@@ -15,6 +15,7 @@
 #T::Send ^t
 +#T::Send +^t
 #N::Send ^n
++#N::Send +^n
 #O::Send ^o
 #W::Send ^w
 #S::Send ^s
