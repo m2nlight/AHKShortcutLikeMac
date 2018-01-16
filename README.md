@@ -77,15 +77,23 @@ Script Features:
 	| __Function Key__        |                                                                               |
 	| <kbd>CapsLock</kbd> <kbd>F1</kbd>           | Show CapsLock+Fn prompt.                                                      |
 	| <kbd>CapsLock</kbd> <kbd>F2</kbd>           | Toggle window topmost.                                                        |
+	| <kbd>CapsLock</kbd> <kbd>F3</kbd>           | Run Listary.                                                        |
+	| <kbd>CapsLock</kbd> <kbd>F4</kbd>           | Run Everything.                                                        |
+	| <kbd>CapsLock</kbd> <kbd>F5</kbd>           | Run pageant.([PuTTY][1])                                                        |
+	| <kbd>CapsLock</kbd> <kbd>F6</kbd>           | Run puttygen.([PuTTY][1])                                                        |
+	| <kbd>CapsLock</kbd> <kbd>F7</kbd>           | Run psftp.([PuTTY][1])                                                        |
+	| <kbd>CapsLock</kbd> <kbd>F8</kbd>           | Run putty.([PuTTY][1])                                                       |
 	| <kbd>CapsLock</kbd> <kbd>F9</kbd>           | PowerShell in current explorer path                                           |
 	| <kbd>CapsLock</kbd> <kbd>F10</kbd>          | CMD in current explorer path                                                  |
-	| <kbd>CapsLock</kbd> <kbd>F11</kbd>          | [Git](http://www.git-scm.com/download/win) in current explorer path            |
+	| <kbd>CapsLock</kbd> <kbd>F11</kbd>          | [Git][2] in current explorer path            |
 	| <kbd>CapsLock</kbd> <kbd>F12</kbd>          | Bash (Win10 WSL) in current explorer path                                     |
 	| __Special Key__         |                                                                               |
 	| <kbd>Win</kbd> <kbd>F1</kbd>                | Show Windows WinX Menus                                                       |
 	| <kbd>Win</kbd> <kbd>F2</kbd>                | Show Windows run dialog                                                       |
 	| and more...             |                                                                               |
 
+[1]: https://www.chiark.greenend.org.uk/~sgtatham/putty/
+[2]: http://www.git-scm.com/download/win
 
 Known Issue:
 * <kbd>CapsLock</kbd> <kbd>F12</kbd> to show bash shell, only support U64 mode.

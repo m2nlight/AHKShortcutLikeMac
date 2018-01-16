@@ -121,13 +121,16 @@ LAlt & X::Send +{End}^x           ; cut to line end
 ; function key
 CapsLock & F1::
   title=CapsLock + {Fn}
-  msg=CapsLock + {Fn}: `n`nF1 - Show this.`nF2 - Toogle always on top.`nF3 - `nF4 - Run Lingoes.`n`nF5 - `nF6 - `nF7 - Run Listary.`nF8 - Run Everything.`n`nF9 - Run Powershell.`nF10 - Run CMD.`nF11 - Run Git shell.`nF12 - Run Bash shell(WSL).`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.
+  msg=CapsLock+F1 - Show this.`nCapsLock+F2 - Toogle always on top.`nCapsLock+F3 - Run Listary.`nCapsLock+F4 - Run Everything.`n`nCapsLock+F5 - Run pageant.`nCapsLock+F6 - Run puttygen.`nCapsLock+F7 - Run psftp.`nCapsLock+F8 - Run putty.`n`nCapsLock+F9 - Run Powershell.`nCapsLock+F10 - Run CMD.`nCapsLock+F11 - Run Git shell.`nCapsLock+F12 - Run Bash shell(WSL).`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.`nWin+F3 - Show Desktop.`nWin+F10 - Mute.`nWin+F11 - Volume down.`nWin+F12 - volume up.
   MsgBox ,,%title%,%msg%,
 return
 CapsLock & F2::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
-CapsLock & F4::Run "C:\Program Files\Lingoes\Translator2\Lingoes64.exe"    ; Run Lingoes64
-CapsLock & F7::Run "C:\Program Files\Listary\Listary.exe"    ; Run Listary
-CapsLock & F8::Run "C:\Tools\Everything\Everything.exe"    ; Run Everything
+CapsLock & F3::Run "C:\Program Files\Listary\Listary.exe"    ; Run Listary
+CapsLock & F4::Run "C:\Tools\Everything\Everything.exe"    ; Run Everything
+CapsLock & F5::Run "pageant.exe"
+CapsLock & F6::Run "puttygen.exe"
+CapsLock & F7::RunCmd("psftp.exe")
+CapsLock & F8::Run "putty.exe"
 CapsLock & F9::                 ; Run PowerShell
   curPath := CurrentPath()
   Run powershell.exe -NoExit "cd \"%curPath%\""
