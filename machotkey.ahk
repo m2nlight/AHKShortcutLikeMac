@@ -139,7 +139,16 @@ CapsLock & F10::RunCmd("ver")    ; Run cmd
 CapsLock & F11::RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
 ;CapsLock & F12::RunCmd("C:\msys64\msys2_shell.bat")    ; Run msys2 shell
 ;CapsLock & F12::ListHotkeys    ; Show ListHotKeys window.
-CapsLock & F12::RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell
+CapsLock & F12::
+  if FileExist("C:\Windows\System32\bash.exe")
+  {
+    RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell
+  }
+  else
+  {
+    MsgBox ,,AHK,Sorry`, base.exe is not exist.,3
+  }
+return
 
 ; ## Hotstrings ##
 :*:]date::
@@ -238,12 +247,15 @@ GetCurrentExplorerURL(getLastWhenNoFound=false)
   WinGet, curhwnd, ID, A
   for pExp in ComObjCreate("Shell.Application").Windows
   {
-    if (pExp.FullName = "C:\WINDOWS\EXPLORER.EXE") {
-      if (pExp.hwnd = curhwnd) {
-        return pExp.LocationURL
-      }
-      if(StrLen(pExp.LocationURL)> 0) {
-        last := pExp.LocationURL
+    try
+    {
+      if (pExp.FullName = "C:\WINDOWS\EXPLORER.EXE") {
+        if (pExp.hwnd = curhwnd) {
+          return pExp.LocationURL
+        }
+        if(StrLen(pExp.LocationURL)> 0) {
+          last := pExp.LocationURL
+        }
       }
     }
   }
