@@ -121,7 +121,7 @@ LAlt & X::Send +{End}^x           ; cut to line end
 ; function key
 CapsLock & F1::
   title=CapsLock + {Fn}
-  msg=CapsLock+F1 - Show this.`nCapsLock+F2 - Toogle always on top.`nCapsLock+F3 - Run Listary.`nCapsLock+F4 - Run Everything.`n`nCapsLock+F5 - Run pageant.`nCapsLock+F6 - Run puttygen.`nCapsLock+F7 - Run psftp.`nCapsLock+F8 - Run putty.`n`nCapsLock+F9 - Run Powershell.`nCapsLock+F10 - Run CMD.`nCapsLock+F11 - Run Git shell.`nCapsLock+F12 - Run Bash shell(WSL).`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.`nWin+F3 - Show Desktop.`nWin+F10 - Mute.`nWin+F11 - Volume down.`nWin+F12 - volume up.
+  msg=CapsLock+F1 - Show this.`nCapsLock+F2 - Toogle always on top.`nCapsLock+F3 - Run Listary.`nCapsLock+F4 - Run Everything.`n`nCapsLock+F5 - Run pageant.`nCapsLock+F6 - Run puttygen.`nCapsLock+F7 - Run psftp.`nCapsLock+F8 - Run putty.`n`nCapsLock+F9 - Run Powershell.`nCapsLock+F10 - Run CMD.`nCapsLock+F11 - Run Git shell.`nCapsLock+F12 - Run Bash shell(WSL)/MSYS2.`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.`nWin+F3 - Show Desktop.`nWin+F10 - Mute.`nWin+F11 - Volume down.`nWin+F12 - volume up.
   MsgBox ,,%title%,%msg%,
 return
 CapsLock & F2::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
@@ -142,7 +142,19 @@ CapsLock & F11::RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")   
 CapsLock & F12::
   if FileExist("C:\Windows\System32\bash.exe")
   {
-    RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell
+    RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell in win10 amd64
+  }
+  else if FileExist("C:\Windows\sysnative\bash.exe")
+  {
+    RunCmdAndClose("""C:\Windows\sysnative\bash.exe"" --login")    ; Run bash shell in win10 x86
+  }
+  else if FileExist("C:\msys64\usr\bin\mintty.exe")
+  {
+    RunMSYS2("C:\msys64\usr\bin\mintty.exe")
+  }
+  else if FileExist("C:\msys32\usr\bin\mintty.exe")
+  {
+    RunMSYS2("C:\msys32\usr\bin\mintty.exe")
   }
   else
   {
@@ -169,6 +181,7 @@ return
 return
 
 ; ## Mouse ##
+/*
 WheelUP::
 Send {WheelDown}
 Return
@@ -184,6 +197,7 @@ Return
 WheelRight::
 Send {WheelLeft}
 Return
+*/
 
 ; ## functions ##
 RunCmd(command)
@@ -196,6 +210,14 @@ RunCmdAndClose(command)
 {
   curPath := CurrentPath()
   Run %comspec% /C "cd /d "%curPath%" & %command%"
+}
+
+RunMSYS2(path)
+{
+  curPath := CurrentPath()
+  curPath := StrReplace(curPath,"\","/")
+  parameter = "/bin/bash -lc 'cd ""$(cygpath ""%curPath%"")""; export CHERE_INVOKING=1; exec bash --login -i'"
+  Run "%path%" "%parameter%"
 }
 
 RunOrActivate(Program, isActivate=true, msg="")

@@ -86,7 +86,7 @@ Script Features:
 	| <kbd>CapsLock</kbd> <kbd>F9</kbd>           | PowerShell in current explorer path                                           |
 	| <kbd>CapsLock</kbd> <kbd>F10</kbd>          | CMD in current explorer path                                                  |
 	| <kbd>CapsLock</kbd> <kbd>F11</kbd>          | [Git][2] in current explorer path            |
-	| <kbd>CapsLock</kbd> <kbd>F12</kbd>          | Bash (Win10 WSL) in current explorer path                                     |
+	| <kbd>CapsLock</kbd> <kbd>F12</kbd>          | Bash (Win10 WSL) or [MSYS2][3] in current explorer path                                     |
 	| __Special Key__         |                                                                               |
 	| <kbd>Win</kbd> <kbd>F1</kbd>                | Show Windows WinX Menus                                                       |
 	| <kbd>Win</kbd> <kbd>F2</kbd>                | Show Windows run dialog                                                       |
@@ -94,9 +94,10 @@ Script Features:
 
 [1]: https://www.chiark.greenend.org.uk/~sgtatham/putty/
 [2]: http://www.git-scm.com/download/win
+[3]: http://www.msys2.org/
 
-Known Issue:
-* <kbd>CapsLock</kbd> <kbd>F12</kbd> to show bash shell, only support U64 mode.
+* MSYS2 default directory: `C:\msys64` or `C:\msys32`. When Win10 bash is not found, try to start msys2 bash.
+
 
 Thanks: 
 * [@g1084164986](https://github.com/g1084164986) - Mouse direction support.
