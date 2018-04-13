@@ -20,6 +20,7 @@
 #W::Send ^w
 #S::Send ^s
 #P::Send ^p
+#+P::Send #p
 ; Edit
 #Z::Send ^z
 +#Z::Send ^y
@@ -39,8 +40,8 @@ return
 #Right::Send {End}
 #Up::Send {PgUp}
 #Down::Send {PgDn}
-!Left::Send ^{Left}
-!Right::Send ^{Right}
+LAlt & Left::Send ^{Left}
+LAlt & Right::Send ^{Right}
 #+Left::Send +{Home}
 #+Right::Send +{End}
 #+Up::Send +{PgUp}
