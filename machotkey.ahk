@@ -150,11 +150,11 @@ CapsLock & F12::
   }
   else if FileExist("C:\msys64\usr\bin\mintty.exe")
   {
-    RunMSYS2("C:\msys64\usr\bin\mintty.exe")
+    RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64")
   }
   else if FileExist("C:\msys32\usr\bin\mintty.exe")
   {
-    RunMSYS2("C:\msys32\usr\bin\mintty.exe")
+    RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32")
   }
   else
   {
@@ -212,12 +212,11 @@ RunCmdAndClose(command)
   Run %comspec% /C "cd /d "%curPath%" & %command%"
 }
 
-RunMSYS2(path)
+RunMSYS2(mintty, mingw)
 {
   curPath := CurrentPath()
-  curPath := StrReplace(curPath,"\","/")
-  parameter = "/bin/bash -lc 'cd ""$(cygpath ""%curPath%"")""; export CHERE_INVOKING=1; exec bash --login -i'"
-  Run "%path%" "%parameter%"
+  parameter = "-i /msys2.ico --dir `"%curPath%`" /bin/env MSYSTEM=%mingw% CHERE_INVOKING=1 /usr/bin/bash -l"
+  Run "%mintty%" "%parameter%"
 }
 
 RunOrActivate(Program, isActivate=true, msg="")
