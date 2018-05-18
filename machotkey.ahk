@@ -18,6 +18,7 @@
 +#N::Send +^n
 #O::Send ^o
 #W::Send ^w
+#+W::Send #w
 #S::Send ^s
 #P::Send ^p
 #+P::Send #p

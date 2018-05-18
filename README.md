@@ -6,10 +6,8 @@ Required: **AutoHotKey** [_HomePage_](https://www.autohotkey.com/) [_Github_](ht
 ```
 AutoHotKey v2 is alpha-release. Suggest use v1.1.*
 ```
-v1.1.26.01 downloads
-* [AutoHotkey Portable](https://www.autohotkey.com/download/1.1/AutoHotkey_1.1.26.01.zip)
-* [AutoHotkey_Setup](https://www.autohotkey.com/download/1.1/AutoHotkey_1.1.26.01_setup.exe)
-* [Help](https://www.autohotkey.com/download/1.1/AutoHotkeyHelp.zip)
+v1.1.28.02 downloads
+* [AutoHotkey Portable](https://www.autohotkey.com/download/1.1/AutoHotkey_1.1.28.02.zip)
 
 Script Features:
 * Hot string (e.g. `]date`, `]time`, `]now`, `]longdate`)
