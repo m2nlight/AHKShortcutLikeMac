@@ -2,6 +2,7 @@
 ; Written by Bob
 ; https://github.com/m2nlight/AHKShortcutLikeMac
 
+#SingleInstance force
 #MaxHotkeysPerInterval 2000
 ; ## Special Key ##
 #F1::Send #x    ; Show WinX menu in win10
@@ -88,20 +89,97 @@ LAlt & Right::Send ^{Right}
 #IfWinActive
 
 ; ## custom ##
+CapsLock & 8::
+  length = 12
+  if GetKeyState("Shift") {
+    GeneratePassword(length, true)
+    return
+  }
+  GeneratePassword(length)
+Return
 CapsLock & Left::Send #{Left}    ; WIN+LEFT
 CapsLock & Down::Send #{Down}    ; WIN+DOWN
 CapsLock & Up::Send #{Up}        ; WIN+UP
 CapsLock & Right::Send #{Right}  ; WIN+RIGHT
 ; capslock + key
 CapsLock & Space::SendInput {Space 4}    ; Input 4 space
-CapsLock & H::Send {Left}        ; Move left (VIM: h)
-CapsLock & J::Send {Down}        ; Move down (VIM: j)
-CapsLock & K::Send {Up}          ; Move up (VIM: k)
-CapsLock & L::Send {Right}       ; Move right (VIM: l)
-CapsLock & N::Send {Down}        ; Move down too (VIM: CTRL+N)
-CapsLock & P::Send {Up}          ; Move up too (VIM: CTRL+P)
-CapsLock & 4::Send {End}         ; Move to line end (VIM: SHIFT+$)
-CapsLock & 6::Send {Home}        ; Move to line begin (VIM: SHIFT+^)
+CapsLock & H::
+  if GetKeyState("Shift") {
+    Send +{Left}     ; Add Selection
+    return
+  }
+  Send {Left}        ; Move left (VIM: h)
+Return
+CapsLock & J::
+  if GetKeyState("Shift") {
+    Send +{Down}     ; Add Selection
+    return
+  }
+  Send {Down}        ; Move down (VIM: j)
+Return
+CapsLock & K::
+  if GetKeyState("Shift") {
+    Send +{Up}     ; Add Selection
+    return
+  }
+  Send {Up}          ; Move up (VIM: k)
+Return
+CapsLock & L::
+  if GetKeyState("Shift") {
+    Send +{Right}     ; Add Selection
+    return
+  }
+  Send {Right}       ; Move right (VIM: l)
+Return
+CapsLock & N::
+  if GetKeyState("Shift") {
+    Send +{Down}     ; Add Selection
+    return
+  }
+  Send {Down}        ; Move down too (VIM: CTRL+N)
+Return
+CapsLock & P::
+  if GetKeyState("Shift") {
+    Send +{Up}     ; Add Selection
+    return
+  }
+  Send {Up}          ; Move up too (VIM: CTRL+P)
+Return
+CapsLock & B::
+  if GetKeyState("Shift") {
+    Send +{PgUp}     ; Add Selection
+    return
+  }
+  Send {PgUp}        ; previous page. (VIM: CTRL+B)
+Return
+CapsLock & F::
+  if GetKeyState("Shift") {
+    Send +{PgDn}     ; Add Selection
+    return
+  }
+  Send {PgDn}        ; next page. (VIM: CTRL+F)
+Return
+CapsLock & G::
+  if GetKeyState("Shift") {
+    Send ^{End}    ; Goto page head. (VIM: SHIFT+G)
+    return
+  }
+  Send ^{Home}     ; Goto page foot. (VIM: gg)
+Return
+CapsLock & 4::
+  if GetKeyState("Shift") {
+    Send +{End}     ; Add Selection
+    return
+  }
+  Send {End}         ; Move to line end (VIM: SHIFT+$)
+Return
+CapsLock & 6::
+  if GetKeyState("Shift") {
+    Send +{Home}     ; Add Selection
+    return
+  }
+  Send {Home}        ; Move to line begin (VIM: SHIFT+^)
+Return
 CapsLock & Enter::Send {End}{Enter}        ; Start new line
 CapsLock & \::Send {Home}{Enter}{Up}       ; Start new line at previous line
 CapsLock & RShift::Send {Enter}{Left}      ; Line split
@@ -123,7 +201,7 @@ LAlt & X::Send +{End}^x           ; cut to line end
 ; function key
 CapsLock & F1::
   title=CapsLock + {Fn}
-  msg=CapsLock+F1 - Show this.`nCapsLock+F2 - Toogle always on top.`nCapsLock+F3 - Run Listary.`nCapsLock+F4 - Run Everything.`n`nCapsLock+F5 - Run pageant.`nCapsLock+F6 - Run puttygen.`nCapsLock+F7 - Run psftp.`nCapsLock+F8 - Run putty.`n`nCapsLock+F9 - Run Powershell.`nCapsLock+F10 - Run CMD.`nCapsLock+F11 - Run Git shell.`nCapsLock+F12 - Run Bash shell(WSL)/MSYS2.`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.`nWin+F3 - Show Desktop.`nWin+F10 - Mute.`nWin+F11 - Volume down.`nWin+F12 - volume up.
+  msg=CapsLock+F1 - Show this.`nCapsLock+F2 - Toogle always on top.`nCapsLock+F3 - Run Listary.`nCapsLock+F4 - Run Everything.`n`nCapsLock+F5 - Run pageant.`nCapsLock+F6 - Run puttygen.`nCapsLock+F7 - Run psftp.`nCapsLock+F8 - Run putty.`n`nCapsLock+F9 - Run Powershell.`nCapsLock+F10 - Run CMD.`nCapsLock+F11 - Run Git shell.`nCapsLock+F12 - Run Bash shell(WSL)/MSYS2.`nCapsLock+Shift+F12 - Run MSYS2.`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.`nWin+F3 - Show Desktop.`nWin+F10 - Mute.`nWin+F11 - Volume down.`nWin+F12 - volume up.
   MsgBox ,,%title%,%msg%,
 return
 CapsLock & F2::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
@@ -139,9 +217,24 @@ CapsLock & F9::                 ; Run PowerShell
 return
 CapsLock & F10::RunCmd("ver")    ; Run cmd
 CapsLock & F11::RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
-;CapsLock & F12::RunCmd("C:\msys64\msys2_shell.bat")    ; Run msys2 shell
 ;CapsLock & F12::ListHotkeys    ; Show ListHotKeys window.
 CapsLock & F12::
+  if GetKeyState("Shift") {
+    if FileExist("C:\msys64\usr\bin\mintty.exe")
+    {
+      RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64")
+    }
+    else if FileExist("C:\msys32\usr\bin\mintty.exe")
+    {
+      RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32")
+    }
+    else
+    {
+      MsgBox ,,AHK,Sorry`, mintty.exe don't exist.,3
+    }
+    return
+  }
+  
   if FileExist("C:\Windows\System32\bash.exe")
   {
     RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell in win10 amd64
@@ -160,7 +253,7 @@ CapsLock & F12::
   }
   else
   {
-    MsgBox ,,AHK,Sorry`, base.exe is not exist.,3
+    MsgBox ,,AHK,Sorry`, base.exe or mintty.exe don't exist.,3
   }
 return
 
@@ -312,4 +405,16 @@ ActiveControlIsOfClass(Class) {
     ControlGet, FocusedControlHwnd, Hwnd,, %FocusedControl%, A  
     WinGetClass, FocusedControlClass, ahk_id %FocusedControlHwnd%  
     return (FocusedControlClass=Class)  
+}
+
+GeneratePassword(length, withSpecialChars=false) {
+  Characters = abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+  if withSpecialChars {
+    Characters .= "``~!@#$`%^&*()_+-=[]{}\|`;:'""`,.<>/?"
+  }
+  Loop %length% {
+    Random, r, 1, % StrLen(Characters)
+    Passwords .= SubStr(Characters, r, 1)
+  }
+  SendInput {Raw}%Passwords%
 }
