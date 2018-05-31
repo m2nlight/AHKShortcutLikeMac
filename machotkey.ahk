@@ -193,31 +193,64 @@ CapsLock & V::Send {Home}{Enter}{Up}^v            ; Paste to current line
 CapsLock & Insert::                               ; Paste plain text
   clipboard = %clipboard%
   Send ^v
-return
+Return
 ; left alt + key
 LAlt & V::Send ^v{Enter}          ; paste and go
 LAlt & C::Send +{End}^c           ; copy to line end
 LAlt & X::Send +{End}^x           ; cut to line end
 ; function key
 CapsLock & F1::
-  title=CapsLock + {Fn}
-  msg=CapsLock+F1 - Show this.`nCapsLock+F2 - Toogle always on top.`nCapsLock+F3 - Run Listary.`nCapsLock+F4 - Run Everything.`n`nCapsLock+F5 - Run pageant.`nCapsLock+F6 - Run puttygen.`nCapsLock+F7 - Run psftp.`nCapsLock+F8 - Run putty.`n`nCapsLock+F9 - Run Powershell.`nCapsLock+F10 - Run CMD.`nCapsLock+F11 - Run Git shell.`nCapsLock+F12 - Run Bash shell(WSL)/MSYS2.`nCapsLock+Shift+F12 - Run MSYS2.`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.`nWin+F3 - Show Desktop.`nWin+F10 - Mute.`nWin+F11 - Volume down.`nWin+F12 - Volume up.
+  if GetKeyState("Shift") {
+    ListHotkeys    ; Show ListHotKeys window.
+    return
+  }
+  title=MacHotkey Help
+  msg=CapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`t`t+Shift  as administrator.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`t`t+Shift  as administrator.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`t`t+Shift  as administrator.`nCapsLock+F10  Run CMD.`t`t+Shift  as administrator.`nCapsLock+F11  Run Git shell.`t`t+Shift  as administrator.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
   MsgBox ,,%title%,%msg%,
-return
-CapsLock & F2::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
+Return
+CapsLock & F2::
+  if GetKeyState("Shift") {
+    WinSet, AlwaysOnTop, Off, A
+    return
+  }
+  WinSet, AlwaysOnTop, On, A
+  ;WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
+Return
 CapsLock & F3::Run "C:\Program Files\Listary\Listary.exe"    ; Run Listary
-CapsLock & F4::Run "C:\Tools\Everything\Everything.exe"    ; Run Everything
+CapsLock & F4::
+  if GetKeyState("Shift") and not A_IsAdmin {
+    Run *RunAs "C:\Tools\Everything\Everything.exe"
+    return
+  }
+  Run "C:\Tools\Everything\Everything.exe"    ; Run Everything
+Return
 CapsLock & F5::Run "pageant.exe"
 CapsLock & F6::Run "puttygen.exe"
-CapsLock & F7::RunCmd("psftp.exe")
+CapsLock & F7::
+  if GetKeyState("Shift") and not A_IsAdmin {
+    RunCmd("psftp.exe", true)
+    return
+  }
+  RunCmd("psftp.exe")
+Return
 CapsLock & F8::Run "putty.exe"
 CapsLock & F9::                 ; Run PowerShell
+  if GetKeyState("Shift") and not A_IsAdmin {
+    curPath := CurrentPath()
+    Run *RunAs powershell.exe -NoExit "cd \"%curPath%\""
+    return
+  }
   curPath := CurrentPath()
   Run powershell.exe -NoExit "cd \"%curPath%\""
-return
-CapsLock & F10::RunCmd("ver")    ; Run cmd
+Return
+CapsLock & F10::
+  if GetKeyState("Shift") {
+    RunCmd("ver", true)
+    return
+  }
+  RunCmd("ver")    ; Run cmd
+Return
 CapsLock & F11::RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
-;CapsLock & F12::ListHotkeys    ; Show ListHotKeys window.
 CapsLock & F12::
   if GetKeyState("Shift") {
     if FileExist("C:\msys64\usr\bin\mintty.exe")
@@ -255,7 +288,7 @@ CapsLock & F12::
   {
     MsgBox ,,AHK,Sorry`, base.exe or mintty.exe don't exist.,3
   }
-return
+Return
 
 ; ## Hotstrings ##
 :*:]date::
@@ -295,10 +328,14 @@ Return
 */
 
 ; ## functions ##
-RunCmd(command)
+RunCmd(command, runAsAdmin=false)
 {
   curPath := CurrentPath()
-  Run %comspec% /K "cd /d "%curPath%" & %command%"
+  if runAsAdmin && not A_IsAdmin {
+	Run *RunAs %comspec% /K "cd /d "%curPath%" & %command%"
+  } else {
+    Run %comspec% /K "cd /d "%curPath%" & %command%"
+  }
 }
 
 RunCmdAndClose(command)

@@ -85,17 +85,19 @@ Script Features:
 	| <kbd>LAlt</kbd> <kbd>C</kbd> or <kbd>X</kbd>              | Copy/Cut to line end.                                                         |
 	| <kbd>LAlt</kbd> <kbd>V</kbd>                | paste and go/enter.                                                           |
 	| __Function Key__        |                                                                               |
-	| <kbd>CapsLock</kbd> <kbd>F1</kbd>           | Show CapsLock+Fn prompt.                                                      |
-	| <kbd>CapsLock</kbd> <kbd>F2</kbd>           | Toggle window topmost.                                                        |
+	| <kbd>CapsLock</kbd> <kbd>F1</kbd>           | Show Help.                                                      |
+	| <kbd>CapsLock</kbd> <kbd>Shift</kbd> <kbd>F1</kbd>           | Show ListHotKeys window.                                                      |
+	| <kbd>CapsLock</kbd> <kbd>F2</kbd>           | Turn on current window topmost.                                                        |
+	| <kbd>CapsLock</kbd> <kbd>Shift</kbd> <kbd>F2</kbd>           | Turn off current window topmost.                                                        |
 	| <kbd>CapsLock</kbd> <kbd>F3</kbd>           | Run Listary.                                                        |
-	| <kbd>CapsLock</kbd> <kbd>F4</kbd>           | Run Everything.                                                        |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>F4</kbd>           | Run Everything (as administrator).                                                        |
 	| <kbd>CapsLock</kbd> <kbd>F5</kbd>           | Run pageant.([PuTTY][1])                                                        |
 	| <kbd>CapsLock</kbd> <kbd>F6</kbd>           | Run puttygen.([PuTTY][1])                                                        |
-	| <kbd>CapsLock</kbd> <kbd>F7</kbd>           | Run psftp.([PuTTY][1])                                                        |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>F7</kbd>           | Run psftp (as administrator).([PuTTY][1])                                                        |
 	| <kbd>CapsLock</kbd> <kbd>F8</kbd>           | Run putty.([PuTTY][1])                                                       |
-	| <kbd>CapsLock</kbd> <kbd>F9</kbd>           | PowerShell in current explorer path                                           |
-	| <kbd>CapsLock</kbd> <kbd>F10</kbd>          | CMD in current explorer path                                                  |
-	| <kbd>CapsLock</kbd> <kbd>F11</kbd>          | [Git][2] in current explorer path            |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>F9</kbd>           | PowerShell in current explorer path (as administrator)                                           |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>F10</kbd>          | CMD in current explorer path (as administrator)                                                 |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>F11</kbd>          | [Git][2] in current explorer path (as administrator)           |
 	| <kbd>CapsLock</kbd> <kbd>F12</kbd>          | Bash (Win10 WSL) or [MSYS2][3] in current explorer path                                     |
 	| <kbd>CapsLock</kbd> <kbd>Shift</kbd> <kbd>F12</kbd>          | [MSYS2][3] in current explorer path                                     |
 	| __Special Key__         |                                                                               |
