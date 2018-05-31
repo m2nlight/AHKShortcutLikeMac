@@ -65,10 +65,22 @@ Script Features:
 	| <kbd>CapsLock</kbd> <kbd>Backspace</kbd>    | Delete to line head.                                                          |
 	| <kbd>CapsLock</kbd> <kbd>Delete</kbd>       | Delete to line end.                                                           |
 	| <kbd>CapsLock</kbd> <kbd>Enter</kbd>        | New line.                                                                     |
+	| <kbd>CapsLock</kbd> <kbd>RShift</kbd>        | Line split.                                                                     |
 	| <kbd>CapsLock</kbd> <kbd>D</kbd>            | Duplicate line.                                                               |
 	| <kbd>CapsLock</kbd> <kbd>A</kbd>            | Selected current line.                                                        |
 	| <kbd>CapsLock</kbd> <kbd>C</kbd> or <kbd>X</kbd> or <kbd>V</kbd>        | Copy/Cut/PasteAt current line.                                                |
 	| <kbd>CapsLock</kbd> <kbd>Insert</kbd>       | Paste as text.                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>8</kbd>       | Input a random password.                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>H</kbd>       | Like vim h                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>J</kbd>       | Like vim j                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>K</kbd>       | Like vim k                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>L</kbd>       | Like vim l                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>6</kbd>       | Like vim ^                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>4</kbd>       | Like vim $                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>F</kbd>       | Like vim `Ctrl+F`                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>B</kbd>       | Like vim `Ctrl+B`                                                                |
+	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>G</kbd>       | Like vim `gg` and `Shift+G`                                                                |
+	| <kbd>CapsLock</kbd> <kbd>N/P</kbd>       | Like vim `j/k`                                                                |
 	| __LAlt+ shortcuts__     | LAlt means left alt key.                                                      |
 	| <kbd>LAlt</kbd> <kbd>C</kbd> or <kbd>X</kbd>              | Copy/Cut to line end.                                                         |
 	| <kbd>LAlt</kbd> <kbd>V</kbd>                | paste and go/enter.                                                           |
@@ -85,9 +97,14 @@ Script Features:
 	| <kbd>CapsLock</kbd> <kbd>F10</kbd>          | CMD in current explorer path                                                  |
 	| <kbd>CapsLock</kbd> <kbd>F11</kbd>          | [Git][2] in current explorer path            |
 	| <kbd>CapsLock</kbd> <kbd>F12</kbd>          | Bash (Win10 WSL) or [MSYS2][3] in current explorer path                                     |
+	| <kbd>CapsLock</kbd> <kbd>Shift</kbd> <kbd>F12</kbd>          | [MSYS2][3] in current explorer path                                     |
 	| __Special Key__         |                                                                               |
 	| <kbd>Win</kbd> <kbd>F1</kbd>                | Show Windows WinX Menus                                                       |
 	| <kbd>Win</kbd> <kbd>F2</kbd>                | Show Windows run dialog                                                       |
+	| <kbd>Win</kbd> <kbd>F3</kbd>                | Show Desktop                                                       |
+	| <kbd>Win</kbd> <kbd>F10</kbd>                | Mute                                                       |
+	| <kbd>Win</kbd> <kbd>F11</kbd>                | Volume down                                                      |
+	| <kbd>Win</kbd> <kbd>F12</kbd>                | Volume up                                                       |
 	| and more...             |                                                                               |
 
 [1]: https://www.chiark.greenend.org.uk/~sgtatham/putty/
@@ -103,6 +120,15 @@ Thanks:
 
 
 Tips:
-* Autorun: You can complited it to an execute file by **Ahk2Exe**, then create a shortcut file into Startup Menu(Win10: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`).
+* Autorun: You can complited it to an execute file by **Ahk2Exe**, then create a shortcut file into Startup Menu(Win10: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`)
+  or create a schedule task with `v0.2-beta.1`:
+  ```cmd
+  schtasks.exe /Create /TN machotkey /RU Users /SC ONLOGON /TR "C:\Tools\machotkey\machotkey.exe"
+  ```
+  Query and Delete this task:
+  ```cmd
+  schtasks.exe /Query /TN machotkey
+  schtasks.exe /Delete /TN machotkey /F
+  ```
 * Shortcuts mapping at Virual Mathine(XP ~ win10) on mac.
 * [QuickLook](https://github.com/xupefei/QuickLook) is alike MacOS Quick-Look tool, press <kbd>Space</kbd> to preview some file in the Explorer.

@@ -185,7 +185,7 @@ CapsLock & \::Send {Home}{Enter}{Up}       ; Start new line at previous line
 CapsLock & RShift::Send {Enter}{Left}      ; Line split
 CapsLock & Backspace::Send +{Home}{Backspace}    ; Delete to line begin
 CapsLock & Delete::Send +{End}{Backspace}        ; Delete to line end
-CapsLock & D::Send {Home}+{End}^c{End}{Enter}^v{Home}       ; Duplicate line
+CapsLock & D::Send {Home}+{End}^c{End}{Enter}^v{Home}{Home}       ; Duplicate line
 CapsLock & A::Send {Home}+{End}      ; Selected current line
 CapsLock & C::Send {End}+{Home}^c    ; Selected and Copy current line
 CapsLock & X::Send {End}+{Home}^x{Delete}         ; Cut current line
@@ -201,7 +201,7 @@ LAlt & X::Send +{End}^x           ; cut to line end
 ; function key
 CapsLock & F1::
   title=CapsLock + {Fn}
-  msg=CapsLock+F1 - Show this.`nCapsLock+F2 - Toogle always on top.`nCapsLock+F3 - Run Listary.`nCapsLock+F4 - Run Everything.`n`nCapsLock+F5 - Run pageant.`nCapsLock+F6 - Run puttygen.`nCapsLock+F7 - Run psftp.`nCapsLock+F8 - Run putty.`n`nCapsLock+F9 - Run Powershell.`nCapsLock+F10 - Run CMD.`nCapsLock+F11 - Run Git shell.`nCapsLock+F12 - Run Bash shell(WSL)/MSYS2.`nCapsLock+Shift+F12 - Run MSYS2.`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.`nWin+F3 - Show Desktop.`nWin+F10 - Mute.`nWin+F11 - Volume down.`nWin+F12 - volume up.
+  msg=CapsLock+F1 - Show this.`nCapsLock+F2 - Toogle always on top.`nCapsLock+F3 - Run Listary.`nCapsLock+F4 - Run Everything.`n`nCapsLock+F5 - Run pageant.`nCapsLock+F6 - Run puttygen.`nCapsLock+F7 - Run psftp.`nCapsLock+F8 - Run putty.`n`nCapsLock+F9 - Run Powershell.`nCapsLock+F10 - Run CMD.`nCapsLock+F11 - Run Git shell.`nCapsLock+F12 - Run Bash shell(WSL)/MSYS2.`nCapsLock+Shift+F12 - Run MSYS2.`n`nWin+F1 - Show WinX menu.`nWin+F2 - Show Run dialog.`nWin+F3 - Show Desktop.`nWin+F10 - Mute.`nWin+F11 - Volume down.`nWin+F12 - Volume up.
   MsgBox ,,%title%,%msg%,
 return
 CapsLock & F2::WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
