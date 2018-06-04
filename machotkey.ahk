@@ -7,6 +7,7 @@
 ; ## Special Key ##
 #F1::Send #x    ; Show WinX menu in win10
 #F2::Send #r    ; Show run dialog
+#`::NextWindow()
 
 ; ## Menu ##
 #H::WinMinimize, A
@@ -392,6 +393,29 @@ HideOtherWindow()
   Send #m
   Sleep,200
   WinRestore, %curtitle%
+}
+
+NextWindow()
+{
+  WinGetClass, cur_class, A
+  acitve_id := 0
+  DetectHiddenText, On
+  WinGet, id, list,,, Program Manager
+  ; don't break the loop
+  Loop, %id%
+  {
+    this_id := id%A_Index% 
+    WinGetClass, this_class, ahk_id %this_id%
+    if (this_class != cur_class) {
+      continue
+    }
+    if (acitve_id = 0) {
+      active_id := this_id
+    }
+  }
+  if (active_id != 0) {
+    WinActivate, ahk_id %active_id%
+  }
 }
 
 CurrentPath()
