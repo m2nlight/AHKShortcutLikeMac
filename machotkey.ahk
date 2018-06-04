@@ -185,10 +185,10 @@ CapsLock & \::Send {Home}{Enter}{Up}       ; Start new line at previous line
 CapsLock & RShift::Send {Enter}{Left}      ; Line split
 CapsLock & Backspace::Send +{Home}{Backspace}    ; Delete to line begin
 CapsLock & Delete::Send +{End}{Backspace}        ; Delete to line end
-CapsLock & D::Send {Home}+{End}^c{End}{Enter}^v{Home}{Home}       ; Duplicate line
+CapsLock & D::Send {Home}+{End}^c{End}{Enter}^v{Home 2}       ; Duplicate line
 CapsLock & A::Send {Home}+{End}      ; Selected current line
 CapsLock & C::Send {End}+{Home}^c    ; Selected and Copy current line
-CapsLock & X::Send {End}+{Home}^x{Delete}         ; Cut current line
+CapsLock & X::Send {End}+{Home 2}^x{Delete}         ; Cut current line
 CapsLock & V::Send {Home}{Enter}{Up}^v            ; Paste to current line
 CapsLock & Insert::                               ; Paste plain text
   clipboard = %clipboard%
@@ -255,11 +255,11 @@ CapsLock & F12::
   if GetKeyState("Shift") {
     if FileExist("C:\msys64\usr\bin\mintty.exe")
     {
-      RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64")
+      RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64", true)
     }
     else if FileExist("C:\msys32\usr\bin\mintty.exe")
     {
-      RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32")
+      RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32", true)
     }
     else
     {
@@ -344,11 +344,18 @@ RunCmdAndClose(command)
   Run %comspec% /C "cd /d "%curPath%" & %command%"
 }
 
-RunMSYS2(mintty, mingw)
+RunMSYS2(mintty, mingw, runAsAdmin=false)
 {
   curPath := CurrentPath()
+  if (SubStr(curPath, -1) == ":\") {
+    curPath .= "\"  ; like C:\\
+  }
   parameter = "-i /msys2.ico --dir `"%curPath%`" /bin/env MSYSTEM=%mingw% CHERE_INVOKING=1 /usr/bin/bash -l"
-  Run "%mintty%" "%parameter%"
+  if runAsAdmin && not A_IsAdmin {
+    Run *RunAs "%mintty%" "%parameter%"
+  } else {
+    Run "%mintty%" "%parameter%"
+  }
 }
 
 RunOrActivate(Program, isActivate=true, msg="")
