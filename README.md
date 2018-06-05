@@ -16,6 +16,7 @@ Script Features:
 	| HotKeys                 | Desc                                                                          |
 	| ---                     | ---                                                                           |
 	| __MacOS shortcuts__     |                                                                               |
+	| <kbd>Win</kbd> <kbd>`</kbd>                 | Active next same class window                                                 |
 	| <kbd>Win</kbd> <kbd>H</kbd>                 | Hide(minmize) current window                                                  |
 	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>H</kbd>           | Hide(minmize) other windows                                                   |
 	| <kbd>Win</kbd> <kbd>Q</kbd>                 | Quit current application                                                      |
@@ -31,6 +32,7 @@ Script Features:
 	| <kbd>Win</kbd> <kbd>X</kbd>                 | Cut                                                                           |
 	| <kbd>Win</kbd> <kbd>C</kbd>                 | Copy                                                                          |
 	| <kbd>Win</kbd> <kbd>V</kbd>                 | Paste                                                                         |
+	| <kbd>Win</kbd> <kbd>Alt</kbd> <kbd>V</kbd>                 | Move files from clipboard to current location                                                                       |
 	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>Alt</kbd> <kbd>V</kbd>       | Paste as text                                                                 |
 	| <kbd>Win</kbd> <kbd>A</kbd>                 | Select all                                                                    |
 	| <kbd>Win</kbd> <kbd>F</kbd>                 | Find (Ctrl+F)                                                                 |
