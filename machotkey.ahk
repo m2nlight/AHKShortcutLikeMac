@@ -12,6 +12,10 @@ if A_Args.Length() > 0 {
     cmd := A_Args[1]
     if (cmd = "movefiles") {
       ShellMoveFile()
+    } else if (cmd = "emptybin") {
+      EmptyBin()
+    } else if (cmd = "sliceemptybin") {
+      EmptyBin(true)
     }
   }
   ExitApp
@@ -81,8 +85,8 @@ LAlt & Right::Send ^{Right}
 #F10::Send {Volume_Mute}
 #F11::Send {Volume_Down}
 #F12::Send {Volume_Up}
-#+Backspace::EmptyBin()
-#+!Backspace::EmptyBin(true)
+#+Backspace::RunNewInstance("emptybin")
+#+!Backspace::RunNewInstance("sliceemptybin")
 ; Explorer
 #IfWinActive ahk_exe Explorer.EXE
 #If ActiveControlIsOfClass("SysListView32") or  ActiveControlIsOfClass("DirectUIHWND")
