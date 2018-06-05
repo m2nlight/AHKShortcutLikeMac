@@ -125,7 +125,7 @@ Thanks:
 
 Tips:
 * Autorun: You can complited it to an execute file by **Ahk2Exe**, then create a shortcut file into Startup Menu(Win10: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`)
-  or create a schedule task with `v0.2-beta.1`:
+  or create a schedule task:
   ```cmd
   schtasks.exe /Create /TN machotkey /RU Users /SC ONLOGON /TR "C:\Tools\machotkey\machotkey.exe"
   ```

@@ -2,8 +2,21 @@
 ; Written by Bob
 ; https://github.com/m2nlight/AHKShortcutLikeMac
 
-#SingleInstance force
-#MaxHotkeysPerInterval 2000
+#SingleInstance Off
+#Persistent
+SetWorkingDir, %A_ScriptDir%
+
+if A_Args.Length() > 0 {
+  #NoEnv
+  try {
+    cmd := A_Args[1]
+    if (cmd = "movefiles") {
+      ShellMoveFile()
+    }
+  }
+  ExitApp
+}
+
 ; ## Special Key ##
 #F1::Send #x    ; Show WinX menu in win10
 #F2::Send #r    ; Show run dialog
@@ -77,7 +90,11 @@ LAlt & Right::Send ^{Right}
 #Up::Send !{Up}
 #Down::Send {Enter}
 #Enter::Send {F2}
-!#V::CallMoveFile()
+!#V::
+  if CheckMoveFile() {
+    RunNewInstance("movefiles")
+  }
+Return
 #If
 #IfWinActive
 
@@ -494,7 +511,32 @@ GeneratePassword(length, withSpecialChars=false) {
   SendInput {Raw}%Passwords%
 }
 
-CallMoveFile() {
+RunNewInstance(cmd) {
+  If  A_IsCompiled {
+    Run %A_ScriptFullPath% %cmd%
+  } else {
+    Run %A_AhkPath% %A_ScriptFullPath% %cmd%
+  }
+}
+
+CheckMoveFile() {
+  target_dir := RealCurrentPath()
+  if StrLen(target_dir) = 0 {
+    return false
+  }
+  source_files := ""
+  Loop, parse, clipboard, `n, `r
+  {
+    IfNotExist, %A_LoopField%, continue
+    source_files = %source_files%%A_LoopField%|
+  }
+  if StrLen(source_files) = 0 {
+    return false
+  }
+  return true
+}
+
+ShellMoveFile() {
   target_dir := RealCurrentPath()
   if StrLen(target_dir) = 0 {
     return
