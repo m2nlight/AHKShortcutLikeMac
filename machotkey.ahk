@@ -235,7 +235,9 @@ Return
 CapsLock & F3::Run "C:\Program Files\Listary\Listary.exe"    ; Run Listary
 CapsLock & F4::
   if GetKeyState("Shift") and not A_IsAdmin {
-    Run *RunAs "C:\Tools\Everything\Everything.exe"
+    try {
+      Run *RunAs "C:\Tools\Everything\Everything.exe"
+    }
     return
   }
   Run "C:\Tools\Everything\Everything.exe"    ; Run Everything
@@ -253,7 +255,9 @@ CapsLock & F8::Run "putty.exe"
 CapsLock & F9::                 ; Run PowerShell
   if GetKeyState("Shift") and not A_IsAdmin {
     curPath := CurrentPath()
-    Run *RunAs powershell.exe -NoExit "cd \"%curPath%\""
+    try {
+      Run *RunAs powershell.exe -NoExit "cd \"%curPath%\""
+    }
     return
   }
   curPath := CurrentPath()
@@ -266,7 +270,13 @@ CapsLock & F10::
   }
   RunCmd("ver")    ; Run cmd
 Return
-CapsLock & F11::RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
+CapsLock & F11::
+  if GetKeyState("Shift") {
+    RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login", true)
+    return
+  }
+  RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
+Return
 CapsLock & F12::
   if GetKeyState("Shift") {
     if FileExist("C:\msys64\usr\bin\mintty.exe")
@@ -348,16 +358,24 @@ RunCmd(command, runAsAdmin=false)
 {
   curPath := CurrentPath()
   if runAsAdmin && not A_IsAdmin {
-	Run *RunAs %comspec% /K "cd /d "%curPath%" & %command%"
+    try {
+	  Run *RunAs %comspec% /K "cd /d "%curPath%" & %command%"
+	}
   } else {
     Run %comspec% /K "cd /d "%curPath%" & %command%"
   }
 }
 
-RunCmdAndClose(command)
+RunCmdAndClose(command, runAsAdmin=false)
 {
   curPath := CurrentPath()
-  Run %comspec% /C "cd /d "%curPath%" & %command%"
+  if runAsAdmin && not A_IsAdmin {
+    try {
+	  Run *RunAs %comspec% /C "cd /d "%curPath%" & %command%"
+	}
+  } else {
+    Run %comspec% /C "cd /d "%curPath%" & %command%"
+  }
 }
 
 RunMSYS2(mintty, mingw, runAsAdmin=false)
@@ -368,7 +386,9 @@ RunMSYS2(mintty, mingw, runAsAdmin=false)
   }
   parameter = "-i /msys2.ico --dir `"%curPath%`" /bin/env MSYSTEM=%mingw% CHERE_INVOKING=1 /usr/bin/bash -l"
   if runAsAdmin && not A_IsAdmin {
-    Run *RunAs "%mintty%" "%parameter%"
+    try {
+      Run *RunAs "%mintty%" "%parameter%"
+    }
   } else {
     Run "%mintty%" "%parameter%"
   }
