@@ -89,16 +89,16 @@ LAlt & Right::Send ^{Right}
 #+!Backspace::RunNewInstance("sliceemptybin")
 ; Explorer
 #IfWinActive ahk_exe Explorer.EXE
-#If ActiveControlIsOfClass("SysListView32") or  ActiveControlIsOfClass("DirectUIHWND")
-#O::Send {Enter}
-#Up::Send !{Up}
-#Down::Send {Enter}
-#Enter::Send {F2}
 !#V::
   if CheckMoveFile() {
     RunNewInstance("movefiles")
   }
 Return
+#If ActiveControlIsOfClass("SysListView32") or  ActiveControlIsOfClass("DirectUIHWND")
+#O::Send {Enter}
+#Up::Send !{Up}
+#Down::Send {Enter}
+#Enter::Send {F2}
 #If
 #IfWinActive
 
@@ -456,7 +456,7 @@ NextWindow()
 RealCurrentPath() {
   WinGetClass, cur_class, A
   WinGet, process_name, ProcessName, A
-  if (cur_class = "WorkerW" and process_name = "Explorer.EXE") {
+  if ((cur_class = "WorkerW" or cur_class = "Progman") and process_name = "Explorer.EXE") {
     return A_Desktop
   }
   return CurrentPath(false, false)
@@ -565,6 +565,10 @@ ShellMoveFile() {
   if StrLen(target_dir) = 0 {
     return
   }
+  ; fix network path "file://ipaddress/path" to "\\ipaddress\path"
+  StringReplace, target_dir, target_dir, file:, , All
+  StringReplace, target_dir, target_dir, /, \, All
+  
   source_files := ""
   Loop, parse, clipboard, `n, `r
   {
