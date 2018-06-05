@@ -510,7 +510,6 @@ CallMoveFile() {
   }
   ;msgbox Will to move %source_files% to %target_dir%
   ShellFileOperation("FO_MOVE", source_files, target_dir,"FOF_ALLOWUNDO|FOF_SIMPLEPROGRESS|FOF_NOCONFIRMMKDIR")     
-  ;MsgBox % ErrorLevel
 }
 
 
@@ -592,45 +591,7 @@ ShellFileOperation( fileO=0x0, fSource="", fTarget="", flags=0x0, ghwnd=0x0 )
     NumPut( ftPtr, SHFILEOPSTRUCT, 3 * A_PtrSize, "PTR" )      ; Target file / folder
     NumPut( flags, SHFILEOPSTRUCT, 4 * A_PtrSize, "Short" )    ; options
 
-	code := DllCall( "Shell32\SHFileOperation" . (A_IsUnicode ? "W" : "A"), Ptr, &SHFILEOPSTRUCT )
-	ErrorLevel := ShellFileOperation_InterpretReturn(code)
-
-	Return NumGet( NextOffset+0 )
-}
-
-ShellFileOperation_InterpretReturn(c)
-{
-	static dict
-	if !dict
-	{
-		dict := Object()
-		dict[0x0]		:= 	""
-		dict[0x71]		:=	"DE_SAMEFILE - The source and destination files are the same file."
-		dict[0x72]		:=	"DE_MANYSRC1DEST - Multiple file paths were specified in the source buffer, but only one destination file path."
-		dict[0x73]		:=	"DE_DIFFDIR - Rename operation was specified but the destination path is a different directory. Use the move operation instead."
-		dict[0x74]		:=	"DE_ROOTDIR - The source is a root directory, which cannot be moved or renamed."
-		dict[0x75]		:=	"DE_OPCANCELLED - The operation was cancelled by the user, or silently cancelled if the appropriate flags were supplied to SHFileOperation."
-		dict[0x76]		:=	"DE_DESTSUBTREE - The destination is a subtree of the source."
-		dict[0x78]		:=	"DE_ACCESSDENIEDSRC - Security settings denied access to the source."
-		dict[0x79]		:=	"DE_PATHTOODEEP - The source or destination path exceeded or would exceed MAX_PATH."
-		dict[0x7A]		:=	"DE_MANYDEST - The operation involved multiple destination paths, which can fail in the case of a move operation."
-		dict[0x7C]		:=	"DE_INVALIDFILES	- The path in the source or destination or both was invalid."
-		dict[0x7D]		:=	"DE_DESTSAMETREE	- The source and destination have the same parent folder."
-		dict[0x7E]		:=	"DE_FLDDESTISFILE - The destination path is an existing file."
-		dict[0x80]		:=	"DE_FILEDESTISFLD - The destination path is an existing folder."
-		dict[0x81]		:=	"DE_FILENAMETOOLONG - The name of the file exceeds MAX_PATH."
-		dict[0x82]		:=	"DE_DEST_IS_CDROM - The destination is a read-only CD-ROM, possibly unformatted."
-		dict[0x83]		:=	"DE_DEST_IS_DVD - The destination is a read-only DVD, possibly unformatted."
-		dict[0x84]		:=	"DE_DEST_IS_CDRECORD - The destination is a writable CD-ROM, possibly unformatted."
-		dict[0x85]		:=	"DE_FILE_TOO_LARGE - The file involved in the operation is too large for the destination media or file system."
-		dict[0x86]		:=	"DE_SRC_IS_CDROM - The source is a read-only CD-ROM, possibly unformatted."
-		dict[0x87]		:=	"DE_SRC_IS_DVD - The source is a read-only DVD, possibly unformatted."
-		dict[0x88]		:=	"DE_SRC_IS_CDRECORD - The source is a writable CD-ROM, possibly unformatted."
-		dict[0xB7]		:=	"DE_ERROR_MAX - MAX_PATH was exceeded during the operation."
-		dict[0x402]		:= 	"An unknown error occurred. This is typically due to an invalid path in the source or destination. This error does not occur on Windows Vista and later."
-		dict[0x10000]	:=	"RRORONDEST	- An unspecified error occurred on the destination."
-		dict[0x10074]	:=	"E_ROOTDIR | ERRORONDEST	- Destination is a root directory and cannot be renamed."
-	}
-	
-	return dict[c] ? dict[c] : "Error code not recognized"
+	DllCall( "Shell32\SHFileOperation" . (A_IsUnicode ? "W" : "A"), Ptr, &SHFILEOPSTRUCT )
+	SHFILEOPSTRUCT := ""
+	Return
 }
