@@ -65,8 +65,8 @@ return
 #Right::Send {End}
 #Up::Send {PgUp}
 #Down::Send {PgDn}
-LAlt & Left::Send ^{Left}
-LAlt & Right::Send ^{Right}
+<!Left::Send ^{Left}
+<!Right::Send ^{Right}
 #+Left::Send +{Home}
 #+Right::Send +{End}
 #+Up::Send +{PgUp}
