@@ -439,7 +439,7 @@ KillActiveWindow()
 HideOtherWindow()
 {
   WinGet, cur_id, id, A
-  DetectHiddenText, Off
+  DetectHiddenText, On
   DetectHiddenWindows, Off
   WinGet, id, list,,, Program Manager
   Loop, %id%
@@ -450,7 +450,7 @@ HideOtherWindow()
     }
     WinGetTitle, this_title, ahk_id %this_id%
     if WinExist(this_title) {
-      WinMinimize, %this_title%
+      WinMinimize, ahk_id %this_id%
     }
   }
 }
