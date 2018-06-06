@@ -19,6 +19,8 @@ if A_Args.Length() > 0 {
       EmptyBin()
     } else if (cmd = "sliceemptybin") {
       EmptyBin(true)
+    } else {
+      ExitApp, 1
     }
   }
   ExitApp
@@ -90,7 +92,11 @@ LAlt & Right::Send ^{Right}
 #F12::Send {Volume_Up}
 #+Backspace::RunNewInstance("emptybin")
 #+!Backspace::RunNewInstance("sliceemptybin")
-#!Escape::Run, taskmgr
+#!Escape::
+  try {
+    Run, "C:\Windows\System32\Taskmgr.exe"
+  }
+Return
 #+!Escape::KillActiveWindow()
 ; Explorer
 #IfWinActive ahk_exe Explorer.EXE
@@ -226,7 +232,7 @@ CapsLock & F1::
     return
   }
   title=%my_name% %my_version%
-  msg=CapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`t`t+Shift  as administrator.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`t`t+Shift  as administrator.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`t`t+Shift  as administrator.`nCapsLock+F10  Run CMD.`t`t+Shift  as administrator.`nCapsLock+F11  Run Git shell.`t`t+Shift  as administrator.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
+  msg=CapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`nCapsLock+F10  Run CMD.`nCapsLock+F11  Run Git shell.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nCapsLock+Shift+Fn Run as administrator.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
   MsgBox ,,%title%,%msg%,
 Return
 CapsLock & F2::
@@ -237,89 +243,16 @@ CapsLock & F2::
   WinSet, AlwaysOnTop, On, A
   ;WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
 Return
-CapsLock & F3::Run "C:\Program Files\Listary\Listary.exe"    ; Run Listary
-CapsLock & F4::
-  if GetKeyState("Shift") and not A_IsAdmin {
-    try {
-      Run *RunAs "C:\Tools\Everything\Everything.exe"
-    }
-    return
-  }
-  Run "C:\Tools\Everything\Everything.exe"    ; Run Everything
-Return
-CapsLock & F5::Run "pageant.exe"
-CapsLock & F6::Run "puttygen.exe"
-CapsLock & F7::
-  if GetKeyState("Shift") and not A_IsAdmin {
-    RunCmd("psftp.exe", true)
-    return
-  }
-  RunCmd("psftp.exe")
-Return
-CapsLock & F8::Run "putty.exe"
-CapsLock & F9::                 ; Run PowerShell
-  if GetKeyState("Shift") and not A_IsAdmin {
-    curPath := CurrentPath()
-    try {
-      Run *RunAs powershell.exe -NoExit "cd \"%curPath%\""
-    }
-    return
-  }
-  curPath := CurrentPath()
-  Run powershell.exe -NoExit "cd \"%curPath%\""
-Return
-CapsLock & F10::
-  if GetKeyState("Shift") {
-    RunCmd("ver", true)
-    return
-  }
-  RunCmd("ver")    ; Run cmd
-Return
-CapsLock & F11::
-  if GetKeyState("Shift") {
-    RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login", true)
-    return
-  }
-  RunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")    ; Run git sh
-Return
-CapsLock & F12::
-  if GetKeyState("Shift") {
-    if FileExist("C:\msys64\usr\bin\mintty.exe")
-    {
-      RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64", true)
-    }
-    else if FileExist("C:\msys32\usr\bin\mintty.exe")
-    {
-      RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32", true)
-    }
-    else
-    {
-      MsgBox ,,AHK,Sorry`, mintty.exe don't exist.,3
-    }
-    return
-  }
-  
-  if FileExist("C:\Windows\System32\bash.exe")
-  {
-    RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell in win10 amd64
-  }
-  else if FileExist("C:\Windows\sysnative\bash.exe")
-  {
-    RunCmdAndClose("""C:\Windows\sysnative\bash.exe"" --login")    ; Run bash shell in win10 x86
-  }
-  else if FileExist("C:\msys64\usr\bin\mintty.exe")
-  {
-    RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64")
-  }
-  else if FileExist("C:\msys32\usr\bin\mintty.exe")
-  {
-    RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32")
-  }
-  else
-  {
-    MsgBox ,,AHK,Sorry`, base.exe or mintty.exe don't exist.,3
-  }
-Return
+CapsLock & F3::RunRun("C:\Program Files\Listary\Listary.exe")    ; Run Listary
+CapsLock & F4::RunRun("C:\Tools\Everything\Everything.exe")      ; Run Everything
+CapsLock & F5::RunRun("pageant.exe")
+CapsLock & F6::RunRun("puttygen.exe")
+CapsLock & F7::RunRunCmdAndClose("psftp.exe")
+CapsLock & F8::RunRun("putty.exe")
+CapsLock & F9::RunRunPowershell() ; Run PowerShell
+CapsLock & F10::RunRunCmd("ver")   ; Run cmd
+CapsLock & F11::RunRunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")
+CapsLock & F12::RunRunBashOrMSYS()
 
 ; ## Hotstrings ##
 :*:]date::
@@ -359,13 +292,100 @@ Return
 */
 
 ; ## functions ##
+RunRun(command)
+{
+  try {
+    if GetKeyState("Shift") && not A_IsAdmin {
+      Run *RunAs %command%
+      Return
+    }
+    Run %command%
+  }
+}
+
+RunRunCmd(command)
+{
+  try {
+    curPath := CurrentPath()
+    if GetKeyState("Shift") {
+      RunCmd(command, true)
+      Return
+    }
+    RunCmd(command)
+  }
+}
+
+RunRunCmdAndClose(command)
+{
+  try {
+    curPath := CurrentPath()
+    if GetKeyState("Shift") {
+      RunCmdAndClose(command, true)
+      Return
+    }
+    RunCmdAndClose(command)
+  }
+}
+
+RunRunPowershell()
+{
+  try {
+    curPath := CurrentPath()
+    if GetKeyState("Shift") {
+      Run *RunAs powershell.exe -NoExit "cd \"%curPath%\""
+      Return
+    }
+    Run powershell.exe -NoExit "cd \"%curPath%\""
+  }
+}
+
+RunRunBashOrMSYS()
+{
+  try {
+    if GetKeyState("Shift") {
+      if FileExist("C:\msys64\usr\bin\mintty.exe")
+      {
+        RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64", true)
+      }
+      else if FileExist("C:\msys32\usr\bin\mintty.exe")
+      {
+        RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32", true)
+      }
+      else
+      {
+        MsgBox ,,AHK,Sorry`, mintty.exe don't exist.,3
+      }
+      return
+    }
+    
+    if FileExist("C:\Windows\System32\bash.exe")
+    {
+      RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell in win10 amd64
+    }
+    else if FileExist("C:\Windows\sysnative\bash.exe")
+    {
+      RunCmdAndClose("""C:\Windows\sysnative\bash.exe"" --login")    ; Run bash shell in win10 x86
+    }
+    else if FileExist("C:\msys64\usr\bin\mintty.exe")
+    {
+      RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64")
+    }
+    else if FileExist("C:\msys32\usr\bin\mintty.exe")
+    {
+      RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32")
+    }
+    else
+    {
+      MsgBox ,,AHK,Sorry`, base.exe or mintty.exe don't exist.,3
+    }
+  }
+}
+
 RunCmd(command, runAsAdmin=false)
 {
   curPath := CurrentPath()
   if runAsAdmin && not A_IsAdmin {
-    try {
-	  Run *RunAs %comspec% /K "cd /d "%curPath%" & %command%"
-	}
+	Run *RunAs %comspec% /K "cd /d "%curPath%" & %command%"
   } else {
     Run %comspec% /K "cd /d "%curPath%" & %command%"
   }
@@ -375,9 +395,7 @@ RunCmdAndClose(command, runAsAdmin=false)
 {
   curPath := CurrentPath()
   if runAsAdmin && not A_IsAdmin {
-    try {
-	  Run *RunAs %comspec% /C "cd /d "%curPath%" & %command%"
-	}
+	Run *RunAs %comspec% /C "cd /d "%curPath%" & %command%"
   } else {
     Run %comspec% /C "cd /d "%curPath%" & %command%"
   }
@@ -391,27 +409,9 @@ RunMSYS2(mintty, mingw, runAsAdmin=false)
   }
   parameter = "-i /msys2.ico --dir `"%curPath%`" /bin/env MSYSTEM=%mingw% CHERE_INVOKING=1 /usr/bin/bash -l"
   if runAsAdmin && not A_IsAdmin {
-    try {
-      Run *RunAs "%mintty%" "%parameter%"
-    }
+    Run *RunAs "%mintty%" "%parameter%"
   } else {
     Run "%mintty%" "%parameter%"
-  }
-}
-
-RunOrActivate(Program, isActivate=true, msg="")
-{
-  SplitPath, Program, ExeFile
-  Process, Exist, %ExeFile%
-  PID = %ErrorLevel%
-  if (PID = 0) {
-    Run, %Program%
-  } else if (StrLen(msg) > 0) {
-    MsgBox ,,AHK,%msg%,3
-  }
-  if (isActivate)
-  {
-    WinActivate, ahk_pid %PID%
   }
 }
 
