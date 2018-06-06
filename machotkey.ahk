@@ -86,7 +86,6 @@ LAlt & Right::Send ^{Right}
 +#4::Send !{PrintScreen}
 +^#4::Send !{PrintScreen}
 #F3::Send #d
-#I::Send !{Enter}
 #F10::Send {Volume_Mute}
 #F11::Send {Volume_Down}
 #F12::Send {Volume_Up}
@@ -106,6 +105,8 @@ Return
   }
 Return
 #If ActiveControlIsOfClass("SysListView32") or  ActiveControlIsOfClass("DirectUIHWND")
+#Backspace::Send {Del}
+#I::Send !{Enter}
 #O::Send {Enter}
 #Up::Send !{Up}
 #Down::Send {Enter}
