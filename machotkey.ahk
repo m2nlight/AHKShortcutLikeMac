@@ -7,7 +7,7 @@
 SetWorkingDir, %A_ScriptDir%
 
 my_name := "MacHotKey"
-my_version := "v0.2-beta.9"
+my_version := "v0.2-beta.10"
 
 if A_Args.Length() > 0 {
   #NoEnv
@@ -122,6 +122,7 @@ Return
 <!X::Send +{End}^x           ; cut to line end
 
 ; CapsLock + key
+CapsLock & Escape::Reload
 CapsLock & 8::
   length = 12
   if GetKeyState("Shift") {
@@ -234,7 +235,7 @@ CapsLock & F1::
     return
   }
   title=%my_name% %my_version%
-  msg=CapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`nCapsLock+F10  Run CMD.`nCapsLock+F11  Run Git shell.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nCapsLock+Shift+Fn Run as administrator.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
+  msg=CapsLock+Esc  Reload`nCapsLock+Shift+Fn Run xxx as administrator.`n`nCapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`nCapsLock+F10  Run CMD.`nCapsLock+F11  Run Git shell.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
   MsgBox ,,%title%,%msg%,
 Return
 CapsLock & F2::

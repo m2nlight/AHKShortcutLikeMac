@@ -90,6 +90,7 @@ Script Features:
 	| <kbd>LAlt</kbd> <kbd>C</kbd> or <kbd>X</kbd>              | Copy/Cut to line end.                                                         |
 	| <kbd>LAlt</kbd> <kbd>V</kbd>                | paste and go/enter.                                                           |
 	| __Function Key__        |                                                                               |
+	| <kbd>CapsLock</kbd> <kbd>Esc</kbd>           | Reload self.                                                      |
 	| <kbd>CapsLock</kbd> <kbd>F1</kbd>           | Show Help.                                                      |
 	| <kbd>CapsLock</kbd> <kbd>Shift</kbd> <kbd>F1</kbd>           | Show ListHotKeys window.                                                      |
 	| <kbd>CapsLock</kbd> <kbd>F2</kbd>           | Turn on current window topmost.                                                        |
