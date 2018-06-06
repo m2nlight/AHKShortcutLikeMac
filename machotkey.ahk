@@ -7,7 +7,7 @@
 SetWorkingDir, %A_ScriptDir%
 
 my_name := "MacHotKey"
-my_version := "v0.2-beta.8"
+my_version := "v0.2-beta.9"
 
 if A_Args.Length() > 0 {
   #NoEnv
