@@ -56,6 +56,8 @@ Script Features:
 	| <kbd>Win</kbd> <kbd>F12</kbd>               | Volume up                                                                     |
 	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>Backspace</kbd>   | Empty Recycle Bin                                                             |
 	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>Alt</kbd> <kbd>Backspace</kbd>| Empty Recycle Bin without prompt                                             |
+	| <kbd>Win</kbd> <kbd>Alt</kbd> <kbd>Esc</kbd>| Run taskmgr                                             |
+	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>Alt</kbd> <kbd>Esc</kbd>| Kill current window                                             |
 	| __Explorer shortcuts__  |                                                                               |
 	| <kbd>Win</kbd> <kbd>Enter</kbd>             | Rename (F2)                                                                   |
 	| <kbd>Win</kbd> <kbd>O</kbd>                 | Open (Enter)                                                                  |

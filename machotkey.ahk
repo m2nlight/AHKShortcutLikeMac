@@ -87,6 +87,8 @@ LAlt & Right::Send ^{Right}
 #F12::Send {Volume_Up}
 #+Backspace::RunNewInstance("emptybin")
 #+!Backspace::RunNewInstance("sliceemptybin")
+#!Escape::Run, taskmgr
+#+!Escape::KillActiveWindow()
 ; Explorer
 #IfWinActive ahk_exe Explorer.EXE
 !#V::
@@ -422,12 +424,32 @@ EmptyBin(isNoConfirm=false)
   DllCall("Shell32\SHEmptyRecycleBin", "Ptr", hwnd, "Ptr", NULL, "UInt", dwFlags)
 }
 
+KillActiveWindow() 
+{
+  WinGetActiveTitle, title
+  if WinExist(title) {
+    WinKill, %title%
+  }
+  WinKill
+}
+
 HideOtherWindow()
 {
-  WinGetActiveTitle, curtitle
-  Send #m
-  Sleep,200
-  WinRestore, %curtitle%
+  WinGet, cur_id, id, A
+  DetectHiddenText, Off
+  DetectHiddenWindows, Off
+  WinGet, id, list,,, Program Manager
+  Loop, %id%
+  {
+    this_id := id%A_Index%
+    if (this_id = cur_id) {
+      continue
+    }
+    WinGetTitle, this_title, ahk_id %this_id%
+    if WinExist(this_title) {
+      WinMinimize, %this_title%
+    }
+  }
 }
 
 NextWindow()
@@ -435,6 +457,7 @@ NextWindow()
   WinGetClass, cur_class, A
   acitve_id := 0
   DetectHiddenText, On
+  DetectHiddenWindows, Off
   WinGet, id, list,,, Program Manager
   ; don't break the loop
   Loop, %id%
