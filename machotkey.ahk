@@ -96,7 +96,8 @@ LAlt & Right::Send ^{Right}
     Run, "C:\Windows\System32\Taskmgr.exe"
   }
 Return
-#+!Escape::KillActiveWindow()
+#+!Escape::KillProcess()
+#+!^Escape::KillProcess(true)
 ; Explorer
 #IfWinActive ahk_exe Explorer.EXE
 !#V::
@@ -428,31 +429,43 @@ EmptyBin(isNoConfirm=false)
   DllCall("Shell32\SHEmptyRecycleBin", "Ptr", hwnd, "Ptr", NULL, "UInt", dwFlags)
 }
 
-KillActiveWindow() 
+KillProcess(byname=false) 
 {
-  WinGetActiveTitle, title
-  if WinExist(title) {
-    WinKill, %title%
+  WinGet, cur_pid, PID, A
+  WinGet, process_name, ProcessName, A
+  if (process_name = "Explorer.EXE") {
+    return
   }
-  WinKill
+  try {
+   if not A_IsAdmin {
+     if byname {
+       Run *RunAs taskkill.exe /F /IM %process_name%,,Hide
+       return
+     }
+     Run *RunAs taskkill.exe /F /PID %cur_pid%,,Hide
+     return
+   }
+   if byname {
+     Run taskkill.exe /F /IM %process_name%,,Hide
+     return
+   }
+   Run taskkill.exe /F /PID %cur_pid%,,Hide
+  }
 }
 
 HideOtherWindow()
 {
   WinGet, cur_id, id, A
-  DetectHiddenText, On
-  DetectHiddenWindows, Off
+  DetectHiddenText, Off
   WinGet, id, list,,, Program Manager
   Loop, %id%
   {
     this_id := id%A_Index%
-    if (this_id = cur_id) {
+    WinGetClass, this_class
+    if (this_id = cur_id or this_class = "Progman" or this_class = "WorkerW" or this_class = "Shell_TrayWnd") {
       continue
     }
-    WinGetTitle, this_title, ahk_id %this_id%
-    if WinExist(this_title) {
-      WinMinimize, ahk_id %this_id%
-    }
+    WinMinimize, ahk_id %this_id%
   }
 }
 
@@ -461,7 +474,6 @@ NextWindow()
   WinGetClass, cur_class, A
   acitve_id := 0
   DetectHiddenText, On
-  DetectHiddenWindows, Off
   WinGet, id, list,,, Program Manager
   ; don't break the loop
   Loop, %id%
