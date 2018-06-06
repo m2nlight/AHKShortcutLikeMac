@@ -6,6 +6,9 @@
 #Persistent
 SetWorkingDir, %A_ScriptDir%
 
+my_name := "MacHotKey"
+my_version := "v0.2-beta.8"
+
 if A_Args.Length() > 0 {
   #NoEnv
   try {
@@ -222,7 +225,7 @@ CapsLock & F1::
     ListHotkeys    ; Show ListHotKeys window.
     return
   }
-  title=MacHotkey Help
+  title=%my_name% %my_version%
   msg=CapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`t`t+Shift  as administrator.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`t`t+Shift  as administrator.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`t`t+Shift  as administrator.`nCapsLock+F10  Run CMD.`t`t+Shift  as administrator.`nCapsLock+F11  Run Git shell.`t`t+Shift  as administrator.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
   MsgBox ,,%title%,%msg%,
 Return
