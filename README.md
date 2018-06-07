@@ -65,6 +65,7 @@ Script Features:
 	| <kbd>Win</kbd> <kbd>Up</kbd>                | Up to                                                                         |
 	| <kbd>Win</kbd> <kbd>Down</kbd>              | Open (Enter) same to `Win+O`                                                  |
 	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>N</kbd> | New folder                                                  |                                              |
+	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>.</kbd> | Show or hide hidden files.                               |                                              |
 	| __CapsLock+ shortcuts__ |                                                                               |
 	| <kbd>CapsLock</kbd> <kbd>Space</kbd>        | Input 4 spaces.                                                               |
 	| <kbd>CapsLock</kbd> <kbd>Backspace</kbd>    | Delete to line head.                                                          |

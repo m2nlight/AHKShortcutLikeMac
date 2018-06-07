@@ -6,8 +6,8 @@
 #Persistent
 SetWorkingDir, %A_ScriptDir%
 
-my_name := "MacHotKey"
-my_version := "v0.2-beta.10"
+global my_name := "MacHotKey"
+global my_version := "v0.2.11"
 
 if A_Args.Length() > 0 {
   #NoEnv
@@ -17,8 +17,13 @@ if A_Args.Length() > 0 {
       ShellMoveFile()
     } else if (cmd = "emptybin") {
       EmptyBin()
-    } else if (cmd = "sliceemptybin") {
+    } else if (cmd = "silentemptybin") {
       EmptyBin(true)
+    } else if (cmd = "SwitchHiddenFiles") {
+      SwitchHiddenFiles()
+      Send {F5}
+    } else if (cmd = "help" or cmd = "version") {
+	  ShowHelp()
     } else {
       ExitApp, 1
     }
@@ -90,7 +95,7 @@ return
 #F11::Send {Volume_Down}
 #F12::Send {Volume_Up}
 #+Backspace::RunNewInstance("emptybin")
-#+!Backspace::RunNewInstance("sliceemptybin")
+#+!Backspace::RunNewInstance("silentemptybin")
 #!Escape::
   try {
     Run, "C:\Windows\System32\Taskmgr.exe"
@@ -105,6 +110,7 @@ Return
     RunNewInstance("movefiles")
   }
 Return
+#+.::RunNewInstance("SwitchHiddenFiles", true)
 #If ActiveControlIsOfClass("SysListView32") or  ActiveControlIsOfClass("DirectUIHWND")
 #Backspace::Send {Del}
 #I::Send !{Enter}
@@ -234,9 +240,7 @@ CapsLock & F1::
     ListHotkeys    ; Show ListHotKeys window.
     return
   }
-  title=%my_name% %my_version%
-  msg=CapsLock+Esc  Reload`nCapsLock+Shift+Fn Run xxx as administrator.`n`nCapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`nCapsLock+F10  Run CMD.`nCapsLock+F11  Run Git shell.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
-  MsgBox ,,%title%,%msg%,
+  RunNewInstance("help")
 Return
 CapsLock & F2::
   if GetKeyState("Shift") {
@@ -295,6 +299,12 @@ Return
 */
 
 ; ## functions ##
+ShowHelp() {
+  title=%my_name% %my_version%
+  msg=CapsLock+Esc  Reload`nCapsLock+Shift+Fn Run xxx as administrator.`n`nCapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`nCapsLock+F10  Run CMD.`nCapsLock+F11  Run Git shell.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
+  MsgBox ,,%title%,%msg%,
+}
+
 RunRun(command)
 {
   try {
@@ -462,8 +472,8 @@ HideOtherWindow()
   Loop, %id%
   {
     this_id := id%A_Index%
-    WinGetClass, this_class
-    if (this_id = cur_id or this_class = "Progman" or this_class = "WorkerW" or this_class = "Shell_TrayWnd") {
+    WinGetClass, this_class, ahk_id %this_id%
+    if (this_id = cur_id or this_class = "Progman" or this_class = "WorkerW" or this_class = "Shell_TrayWnd" or this_class = "Internet Explorer_Hidden") {
       continue
     }
     WinMinimize, ahk_id %this_id%
@@ -575,11 +585,35 @@ GeneratePassword(length, withSpecialChars=false) {
   SendInput {Raw}%Passwords%
 }
 
-RunNewInstance(cmd) {
-  If  A_IsCompiled {
+RunNewInstance(cmd, runAsAdmin = false) {
+  If A_IsCompiled {
+    if (runAsAdmin && not A_IsAdmin) {
+      try {
+        Run *RunAs %A_ScriptFullPath% %cmd%
+      }
+      return
+    }
     Run %A_ScriptFullPath% %cmd%
+    return
+  }
+  if (runAsAdmin && not A_IsAdmin) {
+    try {
+      Run *RunAs %A_AhkPath% %A_ScriptFullPath% %cmd%
+    }
+    return
+  }
+  Run %A_AhkPath% %A_ScriptFullPath% %cmd%
+}
+
+SwitchHiddenFiles() {
+  SetRegView 64
+  RegRead, OutputVar, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, ShowSuperHidden
+  if (OutputVar and OutputVar = 1) {
+    RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, ShowSuperHidden, 0
+    RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, Hidden, 2
   } else {
-    Run %A_AhkPath% %A_ScriptFullPath% %cmd%
+    RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, ShowSuperHidden, 1
+    RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, Hidden, 1
   }
 }
 
