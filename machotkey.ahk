@@ -7,7 +7,7 @@
 SetWorkingDir, %A_ScriptDir%
 
 global my_name := "MacHotKey"
-global my_version := "v0.2.14"
+global my_version := "v0.2.15"
 global my_bit := A_PtrSize * 8
 global my_website := "https://github.com/m2nlight/AHKShortcutLikeMac"
 
@@ -618,7 +618,12 @@ RunNewInstance(cmd, runAsAdmin = false) {
 
 SwitchHiddenFiles() {
   SetRegView %my_bit%
-  RegRead, OutputVar, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, ShowSuperHidden
+  try {
+    RegRead, OutputVar, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, ShowSuperHidden
+  }
+  catch {
+    OutputVar = 0
+  }
   if (OutputVar and OutputVar = 1) {
     RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, ShowSuperHidden, 0
     RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, Hidden, 2
