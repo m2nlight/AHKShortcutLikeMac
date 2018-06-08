@@ -7,7 +7,9 @@
 SetWorkingDir, %A_ScriptDir%
 
 global my_name := "MacHotKey"
-global my_version := "v0.2.11"
+global my_version := "v0.2.12"
+global my_bit := A_PtrSize * 8
+global my_website := "https://github.com/m2nlight/AHKShortcutLikeMac"
 
 if A_Args.Length() > 0 {
   #NoEnv
@@ -128,7 +130,13 @@ Return
 <!X::Send +{End}^x           ; cut to line end
 
 ; CapsLock + key
-CapsLock & Escape::Reload
+CapsLock & Escape::
+  if GetKeyState("Shift") {
+    Run %my_website%
+    return
+  }
+  Reload
+Return
 CapsLock & 8::
   length = 12
   if GetKeyState("Shift") {
@@ -300,8 +308,8 @@ Return
 
 ; ## functions ##
 ShowHelp() {
-  title=%my_name% %my_version%
-  msg=CapsLock+Esc  Reload`nCapsLock+Shift+Fn Run xxx as administrator.`n`nCapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`nCapsLock+F10  Run CMD.`nCapsLock+F11  Run Git shell.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
+  title=%my_name% %my_version% %my_bit%bit
+  msg=CapsLock+Esc  Restart %my_name%`nCapsLock+Shift+Esc  Visit github`nCapsLock+Shift+Fn   Run xxx as administrator.`n`nCapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`nCapsLock+F10  Run CMD.`nCapsLock+F11  Run Git shell.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
   MsgBox ,,%title%,%msg%,
 }
 
@@ -606,7 +614,7 @@ RunNewInstance(cmd, runAsAdmin = false) {
 }
 
 SwitchHiddenFiles() {
-  SetRegView 64
+  SetRegView %my_bit%
   RegRead, OutputVar, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, ShowSuperHidden
   if (OutputVar and OutputVar = 1) {
     RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, ShowSuperHidden, 0
