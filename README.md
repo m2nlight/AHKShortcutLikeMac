@@ -49,6 +49,7 @@ Script Features:
 	| <kbd>Win</kbd> <kbd>Backspace</kbd>         | Delete                                                                        |
 	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>3</kbd>           | Capture screen to clipboard                                                   |
 	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>4</kbd>           | Capture actived window to clipboard                                           |
+	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>5</kbd>           | Capture screen with region (Win10)                                           |
 	| <kbd>Win</kbd> <kbd>F3</kbd>                | Show desktop                                                                  |
 	| <kbd>Win</kbd> <kbd>I</kbd>                 | Show file/folder property dialog (Alt+Enter)                                  |
 	| <kbd>Win</kbd> <kbd>F10</kbd>               | Mute                                                                          |

@@ -89,9 +89,8 @@ return
 ; Finder
 #Backspace::Send {Del}
 +#3::Send {PrintScreen}
-+^#3::Send {PrintScreen}
 +#4::Send !{PrintScreen}
-+^#4::Send !{PrintScreen}
++#5::Send +#s
 #F3::Send #d
 #F10::Send {Volume_Mute}
 #F11::Send {Volume_Down}
