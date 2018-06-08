@@ -7,7 +7,7 @@
 SetWorkingDir, %A_ScriptDir%
 
 global my_name := "MacHotKey"
-global my_version := "v0.2.12"
+global my_version := "v0.2.14"
 global my_bit := A_PtrSize * 8
 global my_website := "https://github.com/m2nlight/AHKShortcutLikeMac"
 
@@ -89,8 +89,12 @@ return
 ; Finder
 #Backspace::Send {Del}
 +#3::Send {PrintScreen}
-+#4::Send !{PrintScreen}
-+#5::Send +#s
++#4::Send +#s
++#5::
+  try {
+    Run, "C:\Windows\System32\SnippingTool.exe"
+  }
+Return
 #F3::Send #d
 #F10::Send {Volume_Mute}
 #F11::Send {Volume_Down}
