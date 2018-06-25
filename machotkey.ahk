@@ -7,7 +7,7 @@
 SetWorkingDir, %A_ScriptDir%
 
 global my_name := "MacHotKey"
-global my_version := "v0.2.15"
+global my_version := "v0.2.16"
 global my_bit := A_PtrSize * 8
 global my_website := "https://github.com/m2nlight/AHKShortcutLikeMac"
 
@@ -40,7 +40,9 @@ if A_Args.Length() > 0 {
 
 ; ## Menu ##
 #H::WinMinimize, A
-+#H::HideOtherWindow()
+!#H::HideOtherWindow()
+#M::WinMinimize, A
+!#M::WinMinimizeAll
 #Q::Send !{F4}
 ; File
 #T::Send ^t
@@ -477,14 +479,14 @@ KillProcess(byname=false)
 
 HideOtherWindow()
 {
-  WinGet, cur_id, id, A
+  WinGetClass, cur_class, A
   DetectHiddenText, Off
   WinGet, id, list,,, Program Manager
   Loop, %id%
   {
     this_id := id%A_Index%
     WinGetClass, this_class, ahk_id %this_id%
-    if (this_id = cur_id or this_class = "Progman" or this_class = "WorkerW" or this_class = "Shell_TrayWnd" or this_class = "Internet Explorer_Hidden") {
+    if (this_class = cur_class or this_class = "Progman" or this_class = "WorkerW" or this_class = "Shell_TrayWnd" or this_class = "Internet Explorer_Hidden") {
       continue
     }
     WinMinimize, ahk_id %this_id%

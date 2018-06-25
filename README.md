@@ -18,7 +18,9 @@ Script Features:
 	| __MacOS shortcuts__     |                                                                               |
 	| <kbd>Win</kbd> <kbd>`</kbd>                 | Active next same class window                                                 |
 	| <kbd>Win</kbd> <kbd>H</kbd>                 | Hide(minmize) current window                                                  |
-	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>H</kbd>           | Hide(minmize) other windows                                                   |
+	| <kbd>Win</kbd> <kbd>Alt</kbd> <kbd>H</kbd>           | Hide(minmize) other windows                                                   |
+	| <kbd>Win</kbd> <kbd>M</kbd>           | Hide(minmize) current windows                                                   |
+	| <kbd>Win</kbd> <kbd>Alt</kbd> <kbd>M</kbd>           | Hide(minmize) all windows                                                   |
 	| <kbd>Win</kbd> <kbd>Q</kbd>                 | Quit current application                                                      |
 	| <kbd>Win</kbd> <kbd>T</kbd>                 | New tab (Ctrl+T)                                                              |
 	| <kbd>Win</kbd> <kbd>Shift</kbd> <kbd>T</kbd>           | Reload last tab (Ctrl+Shift+T)                                                |
@@ -133,7 +135,7 @@ Tips:
 * Autorun: You can complited it to an execute file by **Ahk2Exe**, then create a shortcut file into Startup Menu(Win10: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`)
   or create a schedule task:
   ```cmd
-  schtasks.exe /Create /TN machotkey /RU Users /SC ONLOGON /TR "C:\Tools\machotkey\machotkey.exe"
+  schtasks.exe /Create /TN machotkey /RU Users /SC ONLOGON /TR "C:\Tools\machotkey\machotkey_win64.exe"
   ```
   Query and Delete this task:
   ```cmd
