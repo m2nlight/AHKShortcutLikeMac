@@ -90,6 +90,7 @@ Script Features:
 	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>B</kbd>       | Like vim `Ctrl+B`                                                                |
 	| <kbd>CapsLock</kbd> <kbd>(Shift)</kbd> <kbd>G</kbd>       | Like vim `gg` and `Shift+G`                                                                |
 	| <kbd>CapsLock</kbd> <kbd>N/P</kbd>       | Like vim `j/k`                                                                |
+	| <kbd>CapsLock</kbd> <kbd>Shift</kbd> <kbd>`1234567890</kbd>       | Set current window transparent to 0% ~ 100%                                    |
 	| __LAlt+ shortcuts__     | LAlt means left alt key.                                                      |
 	| <kbd>LAlt</kbd> <kbd>C</kbd> or <kbd>X</kbd>              | Copy/Cut to line end.                                                         |
 	| <kbd>LAlt</kbd> <kbd>V</kbd>                | paste and go/enter.                                                           |
