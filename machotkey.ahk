@@ -3,16 +3,18 @@
 ; https://github.com/m2nlight/AHKShortcutLikeMac
 
 #SingleInstance Off
-#Persistent
+#HotkeyInterval 2000
+#HotkeyModifierTimeout 100
 SetWorkingDir, %A_ScriptDir%
 
 global my_name := "MacHotKey"
-global my_version := "v0.2.17"
+global my_version := "v0.2.18"
 global my_bit := A_PtrSize * 8
 global my_website := "https://github.com/m2nlight/AHKShortcutLikeMac"
 
 if A_Args.Length() > 0 {
   #NoEnv
+  #Persistent
   try {
     cmd := A_Args[1]
     if (cmd = "movefiles") {
@@ -329,9 +331,9 @@ CapsLock & F5::RunRun("pageant.exe")
 CapsLock & F6::RunRun("puttygen.exe")
 CapsLock & F7::RunRunCmdAndClose("psftp.exe")
 CapsLock & F8::RunRun("putty.exe")
-CapsLock & F9::RunRunPowershell() ; Run PowerShell
+CapsLock & F9::RunRunPowershell()  ; Run PowerShell
 CapsLock & F10::RunRunCmd("ver")   ; Run cmd
-CapsLock & F11::RunRunCmdAndClose("""C:\Program Files\Git\bin\sh.exe"" --login")
+CapsLock & F11::RunRunGit()        ; Run git-bash
 CapsLock & F12::RunRunBashOrMSYS()
 
 ; ## Hotstrings ##
@@ -425,6 +427,22 @@ RunRunPowershell()
   }
 }
 
+RunRunGit()
+{
+  if FileExist("C:\Program Files\Git\git-bash.exe")
+  {
+	RunRun("""C:\Program Files\Git\git-bash.exe"" ""--cd=" . CurrentPath() . ".""")
+  }
+  else if FileExist("D:\Program Files\Git\git-bash.exe")
+  {
+	RunRun("""D:\Program Files\Git\git-bash.exe"" ""--cd=" . CurrentPath() . ".""")
+  }
+  else
+  {
+	MsgBox ,,AHK,Sorry`, git-bash.exe don't exist.,3
+  }
+}
+
 RunRunBashOrMSYS()
 {
   try {
@@ -462,7 +480,7 @@ RunRunBashOrMSYS()
     }
     else
     {
-      MsgBox ,,AHK,Sorry`, base.exe or mintty.exe don't exist.,3
+      MsgBox ,,AHK,Sorry`, bash.exe or mintty.exe don't exist.,3
     }
   }
 }
