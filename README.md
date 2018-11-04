@@ -145,3 +145,22 @@ Tips:
   ```
 * Shortcuts mapping at Virual Mathine(XP ~ win10) on mac.
 * [QuickLook](https://github.com/xupefei/QuickLook) is alike MacOS Quick-Look tool, press <kbd>Space</kbd> to preview some file in the Explorer.
+* Switch <kbd>Win</kbd> and <kbd>Alt</kbd> by registry (win7 ~ win10):
+	```ini
+	Windows Registry Editor Version 5.00
+
+	[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Keyboard Layout]
+	"Scancode Map"=hex:00,00,00,00,00,00,00,00,05,00,00,00,5b,e0,38,00,38,00,5b,e0,\
+	  5c,e0,38,e0,38,e0,5c,e0,00,00,00,00
+
+	```
+  Restore key switch:
+	```
+	Windows Registry Editor Version 5.00
+
+	[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Keyboard Layout]
+	"Scancode Map"=-
+
+	```
+  A GUI tool name is [sharpkeys](https://github.com/randyrants/sharpkeys) can do this.
+
