@@ -1,5 +1,5 @@
 ; Shortcuts like mac
-; Written by Bob
+; Written by m2nlight
 ; https://github.com/m2nlight/AHKShortcutLikeMac
 
 #SingleInstance Off
@@ -8,7 +8,7 @@
 SetWorkingDir, %A_ScriptDir%
 
 global my_name := "MacHotKey"
-global my_version := "v0.2.18"
+global my_version := "v0.2.19"
 global my_bit := A_PtrSize * 8
 global my_website := "https://github.com/m2nlight/AHKShortcutLikeMac"
 
@@ -36,8 +36,8 @@ if A_Args.Length() > 0 {
 }
 
 ; ## Special Key ##
-#F1::Send #x    ; Show WinX menu in win10
-#F2::Send #r    ; Show run dialog
+#F1::Send #x ; Show WinX menu in win10
+#F2::Send #r ; Show run dialog
 #`::NextWindow()
 
 ; ## Menu ##
@@ -120,8 +120,8 @@ Return
   }
 Return
 #+.::RunNewInstance("SwitchHiddenFiles", true)
-#If ActiveControlIsOfClass("SysListView32") or  ActiveControlIsOfClass("DirectUIHWND")
-#Backspace::Send {Del}
+#If ActiveControlIsOfClass("SysListView32") or ActiveControlIsOfClass("DirectUIHWND")
+  #Backspace::Send {Del}
 #I::Send !{Enter}
 #O::Send {Enter}
 #Up::Send !{Up}
@@ -132,9 +132,9 @@ Return
 
 ; ## custom ##
 ; left alt + key
-<!V::Send ^v{Enter}          ; paste and go
-<!C::Send +{End}^c           ; copy to line end
-<!X::Send +{End}^x           ; cut to line end
+<!V::Send ^v{Enter} ; paste and go
+<!C::Send +{End}^c ; copy to line end
+<!X::Send +{End}^x ; cut to line end
 
 ; CapsLock + key
 CapsLock & Escape::
@@ -174,10 +174,10 @@ CapsLock & 4::
     return
   }
   if GetKeyState("Shift") {
-    Send +{End}     ; Add Selection
+    Send +{End} ; Add Selection
     return
   }
-  Send {End}         ; Move to line end (VIM: SHIFT+$)
+  Send {End} ; Move to line end (VIM: SHIFT+$)
 Return
 CapsLock & 5::
   if GetKeyState("Alt") {
@@ -191,10 +191,10 @@ CapsLock & 6::
     return
   }
   if GetKeyState("Shift") {
-    Send +{Home}     ; Add Selection
+    Send +{Home} ; Add Selection
     return
   }
-  Send {Home}        ; Move to line begin (VIM: SHIFT+^)
+  Send {Home} ; Move to line begin (VIM: SHIFT+^)
 Return
 CapsLock & 7::
   if GetKeyState("Alt") {
@@ -226,93 +226,93 @@ CapsLock & 0::
     return
   }
 Return
-CapsLock & Left::Send #{Left}    ; WIN+LEFT
-CapsLock & Down::Send #{Down}    ; WIN+DOWN
-CapsLock & Up::Send #{Up}        ; WIN+UP
-CapsLock & Right::Send #{Right}  ; WIN+RIGHT
+CapsLock & Left::Send #{Left} ; WIN+LEFT
+CapsLock & Down::Send #{Down} ; WIN+DOWN
+CapsLock & Up::Send #{Up} ; WIN+UP
+CapsLock & Right::Send #{Right} ; WIN+RIGHT
 ; capslock + key
-CapsLock & Space::SendInput {Space 4}    ; Input 4 space
+CapsLock & Space::SendInput {Space 4} ; Input 4 space
 CapsLock & H::
   if GetKeyState("Shift") {
-    Send +{Left}     ; Add Selection
+    Send +{Left} ; Add Selection
     return
   }
-  Send {Left}        ; Move left (VIM: h)
+  Send {Left} ; Move left (VIM: h)
 Return
 CapsLock & J::
   if GetKeyState("Shift") {
-    Send +{Down}     ; Add Selection
+    Send +{Down} ; Add Selection
     return
   }
-  Send {Down}        ; Move down (VIM: j)
+  Send {Down} ; Move down (VIM: j)
 Return
 CapsLock & K::
   if GetKeyState("Shift") {
-    Send +{Up}     ; Add Selection
+    Send +{Up} ; Add Selection
     return
   }
-  Send {Up}          ; Move up (VIM: k)
+  Send {Up} ; Move up (VIM: k)
 Return
 CapsLock & L::
   if GetKeyState("Shift") {
-    Send +{Right}     ; Add Selection
+    Send +{Right} ; Add Selection
     return
   }
-  Send {Right}       ; Move right (VIM: l)
+  Send {Right} ; Move right (VIM: l)
 Return
 CapsLock & N::
   if GetKeyState("Shift") {
-    Send +{Down}     ; Add Selection
+    Send +{Down} ; Add Selection
     return
   }
-  Send {Down}        ; Move down too (VIM: CTRL+N)
+  Send {Down} ; Move down too (VIM: CTRL+N)
 Return
 CapsLock & P::
   if GetKeyState("Shift") {
-    Send +{Up}     ; Add Selection
+    Send +{Up} ; Add Selection
     return
   }
-  Send {Up}          ; Move up too (VIM: CTRL+P)
+  Send {Up} ; Move up too (VIM: CTRL+P)
 Return
 CapsLock & B::
   if GetKeyState("Shift") {
-    Send +{PgUp}     ; Add Selection
+    Send +{PgUp} ; Add Selection
     return
   }
-  Send {PgUp}        ; previous page. (VIM: CTRL+B)
+  Send {PgUp} ; previous page. (VIM: CTRL+B)
 Return
 CapsLock & F::
   if GetKeyState("Shift") {
-    Send +{PgDn}     ; Add Selection
+    Send +{PgDn} ; Add Selection
     return
   }
-  Send {PgDn}        ; next page. (VIM: CTRL+F)
+  Send {PgDn} ; next page. (VIM: CTRL+F)
 Return
 CapsLock & G::
   if GetKeyState("Shift") {
-    Send ^{End}    ; Goto page head. (VIM: SHIFT+G)
+    Send ^{End} ; Goto page head. (VIM: SHIFT+G)
     return
   }
-  Send ^{Home}     ; Goto page foot. (VIM: gg)
+  Send ^{Home} ; Goto page foot. (VIM: gg)
 Return
-CapsLock & Enter::Send {End}{Enter}        ; Start new line
-CapsLock & \::Send {Home}{Enter}{Up}       ; Start new line at previous line
-CapsLock & RShift::Send {Enter}{Left}      ; Line split
-CapsLock & Backspace::Send +{Home}{Backspace}    ; Delete to line begin
-CapsLock & Delete::Send +{End}{Backspace}        ; Delete to line end
-CapsLock & D::Send {Home}+{End}^c{End}{Enter}^v{Home 2}       ; Duplicate line
-CapsLock & A::Send {Home}+{End}      ; Selected current line
-CapsLock & C::Send {End}+{Home}^c    ; Selected and Copy current line
-CapsLock & X::Send {End}+{Home 2}^x{Delete}         ; Cut current line
-CapsLock & V::Send {Home}{Enter}{Up}^v            ; Paste to current line
-CapsLock & Insert::                               ; Paste plain text
+CapsLock & Enter::Send {End}{Enter} ; Start new line
+CapsLock & \::Send {Home}{Enter}{Up} ; Start new line at previous line
+CapsLock & RShift::Send {Enter}{Left} ; Line split
+CapsLock & Backspace::Send +{Home}{Backspace} ; Delete to line begin
+CapsLock & Delete::Send +{End}{Backspace} ; Delete to line end
+CapsLock & D::Send {Home}+{End}^c{End}{Enter}^v{Home 2} ; Duplicate line
+CapsLock & A::Send {Home}+{End} ; Selected current line
+CapsLock & C::Send {End}+{Home}^c ; Selected and Copy current line
+CapsLock & X::Send {End}+{Home 2}^x{Delete} ; Cut current line
+CapsLock & V::Send {Home}{Enter}{Up}^v ; Paste to current line
+CapsLock & Insert:: ; Paste plain text
   clipboard = %clipboard%
   Send ^v
 Return
 ; function key
 CapsLock & F1::
   if GetKeyState("Shift") {
-    ListHotkeys    ; Show ListHotKeys window.
+    ListHotkeys ; Show ListHotKeys window.
     return
   }
   RunNewInstance("help")
@@ -325,15 +325,15 @@ CapsLock & F2::
   WinSet, AlwaysOnTop, On, A
   ;WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
 Return
-CapsLock & F3::RunRun("C:\Program Files\Listary\Listary.exe")    ; Run Listary
-CapsLock & F4::RunRun("C:\Tools\Everything\Everything.exe")      ; Run Everything
+CapsLock & F3::RunRun("C:\Program Files\Listary\Listary.exe") ; Run Listary
+CapsLock & F4::RunRun("C:\Tools\Everything\Everything.exe") ; Run Everything
 CapsLock & F5::RunRun("pageant.exe")
 CapsLock & F6::RunRun("puttygen.exe")
 CapsLock & F7::RunRunCmdAndClose("psftp.exe")
 CapsLock & F8::RunRun("putty.exe")
-CapsLock & F9::RunRunPowershell()  ; Run PowerShell
-CapsLock & F10::RunRunCmd("ver")   ; Run cmd
-CapsLock & F11::RunRunGit()        ; Run git-bash
+CapsLock & F9::RunRunPowershell() ; Run PowerShell
+CapsLock & F10::RunRunCmd("ver") ; Run cmd
+CapsLock & F11::RunRunGit() ; Run git-bash
 CapsLock & F12::RunRunBashOrMSYS()
 
 ; ## Hotstrings ##
@@ -376,7 +376,7 @@ Return
 ; ## functions ##
 ShowHelp() {
   title=%my_name% %my_version% %my_bit%bit
-  msg=CapsLock+Shift+Esc  Visit github`nCapsLock+Esc  Restart %my_name%`nCapsLock+Alt+[``~0]  Set current window tranparent to 0`%-100`%.`nCapsLock+Shift+Fn   Run xxx as administrator.`n`nCapsLock+F1  Show this.`t+Shift  Show ListHotKeys window.`nCapsLock+F2  Current window always on top.`t+Shift  turn off.`nCapsLock+F3  Run Listary.`nCapsLock+F4  Run Everything.`n`nCapsLock+F5  Run pageant.`nCapsLock+F6  Run puttygen.`nCapsLock+F7  Run psftp.`nCapsLock+F8  Run putty.`n`nCapsLock+F9  Run Powershell.`nCapsLock+F10  Run CMD.`nCapsLock+F11  Run Git shell.`nCapsLock+F12  Run Bash shell(WSL)/MSYS2.`t+Shift  Run MSYS2.`n`nWin+F1  Show WinX menu.`nWin+F2  Show Run dialog.`nWin+F3  Show Desktop.`nWin+F10  Mute.`nWin+F11  Volume down.`nWin+F12  Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
+  msg=CapsLock+Shift+Esc Visit github`nCapsLock+Esc Restart %my_name%`nCapsLock+Alt+[``~0] Set current window tranparent to 0`%-100`%.`nCapsLock+Shift+Fn Run xxx as administrator.`n`nCapsLock+F1 Show this.`t+Shift Show ListHotKeys window.`nCapsLock+F2 Current window always on top.`t+Shift turn off.`nCapsLock+F3 Run Listary.`nCapsLock+F4 Run Everything.`n`nCapsLock+F5 Run pageant.`nCapsLock+F6 Run puttygen.`nCapsLock+F7 Run psftp.`nCapsLock+F8 Run putty.`n`nCapsLock+F9 Run Powershell.`nCapsLock+F10 Run CMD.`nCapsLock+F11 Run Git shell.`nCapsLock+F12 Run Bash shell(WSL)/MSYS2.`t+Shift Run MSYS2.`n`nWin+F1 Show WinX menu.`nWin+F2 Show Run dialog.`nWin+F3 Show Desktop.`nWin+F10 Mute.`nWin+F11 Volume down.`nWin+F12 Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
   MsgBox ,,%title%,%msg%,
 }
 
@@ -431,15 +431,15 @@ RunRunGit()
 {
   if FileExist("C:\Program Files\Git\git-bash.exe")
   {
-	RunRun("""C:\Program Files\Git\git-bash.exe"" ""--cd=" . CurrentPath() . ".""")
+    RunRun("""C:\Program Files\Git\git-bash.exe"" ""--cd=" . CurrentPath() . ".""")
   }
   else if FileExist("D:\Program Files\Git\git-bash.exe")
   {
-	RunRun("""D:\Program Files\Git\git-bash.exe"" ""--cd=" . CurrentPath() . ".""")
+    RunRun("""D:\Program Files\Git\git-bash.exe"" ""--cd=" . CurrentPath() . ".""")
   }
   else
   {
-	MsgBox ,,AHK,Sorry`, git-bash.exe don't exist.,3
+    MsgBox ,,AHK,Sorry`, git-bash.exe don't exist.,3
   }
 }
 
@@ -461,14 +461,14 @@ RunRunBashOrMSYS()
       }
       return
     }
-    
+
     if FileExist("C:\Windows\System32\bash.exe")
     {
-      RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login")    ; Run bash shell in win10 amd64
+      RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login") ; Run bash shell in win10 amd64
     }
     else if FileExist("C:\Windows\sysnative\bash.exe")
     {
-      RunCmdAndClose("""C:\Windows\sysnative\bash.exe"" --login")    ; Run bash shell in win10 x86
+      RunCmdAndClose("""C:\Windows\sysnative\bash.exe"" --login") ; Run bash shell in win10 x86
     }
     else if FileExist("C:\msys64\usr\bin\mintty.exe")
     {
@@ -509,7 +509,7 @@ RunMSYS2(mintty, mingw, runAsAdmin=false)
 {
   curPath := CurrentPath()
   if (SubStr(curPath, -1) == ":\") {
-    curPath .= "\"  ; like C:\\
+    curPath .= "\" ; like C:\\
   }
   parameter = "-i /msys2.ico --dir `"%curPath%`" /bin/env MSYSTEM=%mingw% CHERE_INVOKING=1 /usr/bin/bash -l"
   if runAsAdmin && not A_IsAdmin {
@@ -539,19 +539,19 @@ KillProcess(byname=false)
     return
   }
   try {
-   if not A_IsAdmin {
-     if byname {
-       Run *RunAs taskkill.exe /F /IM %process_name%,,Hide
-       return
-     }
-     Run *RunAs taskkill.exe /F /PID %cur_pid%,,Hide
-     return
-   }
-   if byname {
-     Run taskkill.exe /F /IM %process_name%,,Hide
-     return
-   }
-   Run taskkill.exe /F /PID %cur_pid%,,Hide
+    if not A_IsAdmin {
+      if byname {
+        Run *RunAs taskkill.exe /F /IM %process_name%,,Hide
+        return
+      }
+      Run *RunAs taskkill.exe /F /PID %cur_pid%,,Hide
+      return
+    }
+    if byname {
+      Run taskkill.exe /F /IM %process_name%,,Hide
+      return
+    }
+    Run taskkill.exe /F /PID %cur_pid%,,Hide
   }
 }
 
@@ -600,7 +600,7 @@ RealCurrentPath() {
   if ((cur_class = "WorkerW" or cur_class = "Progman") and process_name = "Explorer.EXE") {
     return A_Desktop
   }
-  return CurrentPath(false, false)
+return CurrentPath(false, false)
 }
 
 CurrentPath(last = true, fallbackToDesktop = true)
@@ -612,7 +612,7 @@ CurrentPath(last = true, fallbackToDesktop = true)
   if (fallbackToDesktop) {
     return A_Desktop
   }
-  return ""
+return ""
 }
 
 GetCurrentExplorerURL(getLastWhenNoFound=false)
@@ -647,21 +647,21 @@ ConvertExplorerURLToPath(url)
   StringReplace, path, path, /, \, All
   Loop
     If RegExMatch(path, "i)(?<=%)[\da-f]{1,2}", hex)
-      StringReplace, path, path, `%%hex%, % Chr("0x" . hex), All
-    Else Break
-  Return path 
+    StringReplace, path, path, `%%hex%, % Chr("0x" . hex), All
+  Else Break
+    Return path 
 }
 
-ActiveControlIs(Control) {  
-    ControlGetFocus, FocusedControl, A  
-    return (FocusedControl=Control)  
-}  
+ActiveControlIs(Control) { 
+  ControlGetFocus, FocusedControl, A 
+return (FocusedControl=Control) 
+} 
 
-ActiveControlIsOfClass(Class) {  
-    ControlGetFocus, FocusedControl, A  
-    ControlGet, FocusedControlHwnd, Hwnd,, %FocusedControl%, A  
-    WinGetClass, FocusedControlClass, ahk_id %FocusedControlHwnd%  
-    return (FocusedControlClass=Class)  
+ActiveControlIsOfClass(Class) { 
+  ControlGetFocus, FocusedControl, A 
+  ControlGet, FocusedControlHwnd, Hwnd,, %FocusedControl%, A 
+  WinGetClass, FocusedControlClass, ahk_id %FocusedControlHwnd% 
+return (FocusedControlClass=Class) 
 }
 
 GeneratePassword(length, withSpecialChars=false) {
@@ -734,12 +734,12 @@ CheckMoveFile() {
   Loop, parse, clipboard, `n, `r
   {
     IfNotExist, %A_LoopField%, continue
-    source_files = %source_files%%A_LoopField%|
+      source_files = %source_files%%A_LoopField%|
   }
   if StrLen(source_files) = 0 {
     return false
   }
-  return true
+return true
 }
 
 ShellMoveFile() {
@@ -750,78 +750,74 @@ ShellMoveFile() {
   ; fix network path "file://ipaddress/path" to "\\ipaddress\path"
   StringReplace, target_dir, target_dir, file:, , All
   StringReplace, target_dir, target_dir, /, \, All
-  
+
   source_files := ""
   Loop, parse, clipboard, `n, `r
   {
     IfNotExist, %A_LoopField%, continue
-    source_files = %source_files%%A_LoopField%|
+      source_files = %source_files%%A_LoopField%|
   }
   if StrLen(source_files) = 0 {
     return
   }
   ;msgbox Will to move %source_files% to %target_dir%
-  ShellFileOperation("FO_MOVE", source_files, target_dir,"FOF_ALLOWUNDO|FOF_SIMPLEPROGRESS|FOF_NOCONFIRMMKDIR")     
+  ShellFileOperation("FO_MOVE", source_files, target_dir,"FOF_ALLOWUNDO|FOF_SIMPLEPROGRESS|FOF_NOCONFIRMMKDIR") 
 }
-
-
-
 
 ; https://autohotkey.com/board/topic/51486-shellfileoperation-library/
 ; https://github.com/7plus/7plus/blob/f3b270f7b182d2ad023efb00f51e6f77b3029520/Shell.ahk
 ; https://msdn.microsoft.com/en-us/library/windows/desktop/bb759795(v=vs.85).aspx
 ; ShellFileOperation("FO_MOVE", "::::", "::::","FOF_ALLOWUNDO|FOF_SIMPLEPROGRESS|FOF_NOCONFIRMMKDIR")     
 ; MsgBox % ErrorLevel
-ShellFileOperation( fileO=0x0, fSource="", fTarget="", flags=0x0, ghwnd=0x0 )     
+ShellFileOperation( fileO=0x0, fSource="", fTarget="", flags=0x0, ghwnd=0x0 ) 
 {
-    ;dout_f(A_ThisFunc)
-    FO_MOVE   := 0x1
-    FO_COPY   := 0x2
-    FO_DELETE := 0x3
-    FO_RENAME := 0x4
-    
-    FOF_MULTIDESTFILES :=              0x1                ; Indicates that the to member specifies multiple destination files (one for each source file) rather than one directory where all source files are to be deposited.
-    FOF_SILENT :=                     0x4                ; Does not display a progress dialog box.
-    FOF_RENAMEONCOLLISION :=         0x8                ; Gives the file being operated on a new name (such as "Copy #1 of...") in a move, copy, or rename operation if a file of the target name already exists.
-    FOF_NOCONFIRMATION :=             0x10            ; Responds with "yes to all" for any dialog box that is displayed.
-    FOF_ALLOWUNDO :=                 0x40            ; Preserves undo information, if possible. With del, uses recycle bin.
-    FOF_FILESONLY :=                 0x80            ; Performs the operation only on files if a wildcard filename (*.*) is specified.
-    FOF_SIMPLEPROGRESS :=             0x100            ; Displays a progress dialog box, but does not show the filenames.
-    FOF_NOCONFIRMMKDIR :=             0x200            ; Does not confirm the creation of a new directory if the operation requires one to be created.
-    FOF_NOERRORUI :=                 0x400            ; don't put up error UI
-    FOF_NOCOPYSECURITYATTRIBS :=     0x800            ; dont copy file security attributes
-    FOF_NORECURSION :=                 0x1000            ; Only operate in the specified directory. Don't operate recursively into subdirectories.
-    FOF_NO_CONNECTED_ELEMENTS :=     0x2000            ; Do not move connected files as a group (e.g. html file together with images). Only move the specified files.
-    FOF_WANTNUKEWARNING :=             0x4000            ; Send a warning if a file is being destroyed during a delete operation rather than recycled. This flag partially overrides FOF_NOCONFIRMATION.
+  ;dout_f(A_ThisFunc)
+  FO_MOVE := 0x1
+  FO_COPY := 0x2
+  FO_DELETE := 0x3
+  FO_RENAME := 0x4
 
-    
-    ; no more annoying numbers to deal with (but they should still work, if you really want them to)
-    fileO := %fileO% ? %fileO% : fileO
-    
-    ; the double ternary was too fun to pass up
-    _flags := 0
-    Loop Parse, flags, |
-        _flags |= %A_LoopField%    
-    flags := _flags ? _flags : (%flags% ? %flags% : flags)
-    
-    If ( SubStr(fSource,0) != "|" )
-        fSource := fSource . "|"
+  FOF_MULTIDESTFILES := 0x1 ; Indicates that the to member specifies multiple destination files (one for each source file) rather than one directory where all source files are to be deposited.
+  FOF_SILENT := 0x4 ; Does not display a progress dialog box.
+  FOF_RENAMEONCOLLISION := 0x8 ; Gives the file being operated on a new name (such as "Copy #1 of...") in a move, copy, or rename operation if a file of the target name already exists.
+  FOF_NOCONFIRMATION := 0x10 ; Responds with "yes to all" for any dialog box that is displayed.
+  FOF_ALLOWUNDO := 0x40 ; Preserves undo information, if possible. With del, uses recycle bin.
+  FOF_FILESONLY := 0x80 ; Performs the operation only on files if a wildcard filename (*.*) is specified.
+  FOF_SIMPLEPROGRESS := 0x100 ; Displays a progress dialog box, but does not show the filenames.
+  FOF_NOCONFIRMMKDIR := 0x200 ; Does not confirm the creation of a new directory if the operation requires one to be created.
+  FOF_NOERRORUI := 0x400 ; don't put up error UI
+  FOF_NOCOPYSECURITYATTRIBS := 0x800 ; dont copy file security attributes
+  FOF_NORECURSION := 0x1000 ; Only operate in the specified directory. Don't operate recursively into subdirectories.
+  FOF_NO_CONNECTED_ELEMENTS := 0x2000 ; Do not move connected files as a group (e.g. html file together with images). Only move the specified files.
+  FOF_WANTNUKEWARNING := 0x4000 ; Send a warning if a file is being destroyed during a delete operation rather than recycled. This flag partially overrides FOF_NOCONFIRMATION.
 
-    If ( SubStr(fTarget,0) != "|" )
-        fTarget := fTarget . "|"
-    
-    char_size := A_IsUnicode ? 2 : 1
-    char_type := A_IsUnicode ? "UShort" : "Char"
-    
-    fsPtr := &fSource
-    Loop % StrLen(fSource)
-        if NumGet(fSource, (A_Index-1)*char_size, char_type) = 124
-            NumPut(0, fSource, (A_Index-1)*char_size, char_type)
+  ; no more annoying numbers to deal with (but they should still work, if you really want them to)
+  fileO := %fileO% ? %fileO% : fileO
 
-    ftPtr := &fTarget
-    Loop % StrLen(fTarget)
-        if NumGet(fTarget, (A_Index-1)*char_size, char_type) = 124
-            NumPut(0, fTarget, (A_Index-1)*char_size, char_type)
+  ; the double ternary was too fun to pass up
+  _flags := 0
+  Loop Parse, flags, |
+    _flags |= %A_LoopField% 
+  flags := _flags ? _flags : (%flags% ? %flags% : flags)
+
+  If ( SubStr(fSource,0) != "|" )
+    fSource := fSource . "|"
+
+  If ( SubStr(fTarget,0) != "|" )
+    fTarget := fTarget . "|"
+
+  char_size := A_IsUnicode ? 2 : 1
+char_type := A_IsUnicode ? "UShort" : "Char"
+
+  fsPtr := &fSource
+  Loop % StrLen(fSource)
+    if NumGet(fSource, (A_Index-1)*char_size, char_type) = 124
+    NumPut(0, fSource, (A_Index-1)*char_size, char_type)
+
+  ftPtr := &fTarget
+  Loop % StrLen(fTarget)
+    if NumGet(fTarget, (A_Index-1)*char_size, char_type) = 124
+    NumPut(0, fTarget, (A_Index-1)*char_size, char_type)
     /*
     typedef struct _SHFILEOPSTRUCT {
       HWND         hwnd; A_PtrSize
@@ -835,15 +831,15 @@ ShellFileOperation( fileO=0x0, fSource="", fTarget="", flags=0x0, ghwnd=0x0 )
     } SHFILEOPSTRUCT, *LPSHFILEOPSTRUCT;
     Total:
     A_PtrSize + 4 (+ 4 Padding) Padding + A_PtrSize + A_PtrSize + 2 + 2 Padding + 4 + A_PtrSize + A_PtrSize = 12 (+4) + 5 x A_PtrSize
-    */
-    VarSetCapacity( SHFILEOPSTRUCT, 12 + 5 * A_PtrSize, 0)     ; Encoding SHFILEOPSTRUCT
-    NumPut( ghwnd, &SHFILEOPSTRUCT, "PTR")                     ; hWnd of calling GUI
-    NumPut( fileO, SHFILEOPSTRUCT, A_PtrSize, "UINT")          ; File operation
-    NumPut( fsPtr, SHFILEOPSTRUCT, 2 * A_PtrSize, "PTR")       ; Source file / pattern
-    NumPut( ftPtr, SHFILEOPSTRUCT, 3 * A_PtrSize, "PTR" )      ; Target file / folder
-    NumPut( flags, SHFILEOPSTRUCT, 4 * A_PtrSize, "Short" )    ; options
+  */
+  VarSetCapacity( SHFILEOPSTRUCT, 12 + 5 * A_PtrSize, 0) ; Encoding SHFILEOPSTRUCT
+  NumPut( ghwnd, &SHFILEOPSTRUCT, "PTR") ; hWnd of calling GUI
+  NumPut( fileO, SHFILEOPSTRUCT, A_PtrSize, "UINT") ; File operation
+  NumPut( fsPtr, SHFILEOPSTRUCT, 2 * A_PtrSize, "PTR") ; Source file / pattern
+  NumPut( ftPtr, SHFILEOPSTRUCT, 3 * A_PtrSize, "PTR" ) ; Target file / folder
+  NumPut( flags, SHFILEOPSTRUCT, 4 * A_PtrSize, "Short" ) ; options
 
-    DllCall( "Shell32\SHFileOperation" . (A_IsUnicode ? "W" : "A"), Ptr, &SHFILEOPSTRUCT )
-    SHFILEOPSTRUCT := ""
-    Return
+  DllCall( "Shell32\SHFileOperation" . (A_IsUnicode ? "W" : "A"), Ptr, &SHFILEOPSTRUCT )
+  SHFILEOPSTRUCT := ""
+Return
 }
