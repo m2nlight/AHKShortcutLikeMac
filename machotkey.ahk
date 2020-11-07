@@ -8,7 +8,7 @@
 SetWorkingDir, %A_ScriptDir%
 
 global my_name := "MacHotKey"
-global my_version := "v0.2.19"
+global my_version := "v0.3.0"
 global my_bit := A_PtrSize * 8
 global my_website := "https://github.com/m2nlight/AHKShortcutLikeMac"
 
@@ -138,162 +138,77 @@ Return
 
 ; CapsLock + key
 CapsLock & Escape::
-  if GetKeyState("Shift") {
-    Run %my_website%
-    return
-  }
-  Reload
+  Run %my_website%
 Return
-CapsLock & `::
-  if GetKeyState("Alt") {
-    SetTransparent(0)
-    return
-  }
-Return
-CapsLock & 1::
-  if GetKeyState("Alt") {
-    SetTransparent(10)
-    return
-  }
-Return
-CapsLock & 2::
-  if GetKeyState("Alt") {
-    SetTransparent(20)
-    return
-  }
-Return
-CapsLock & 3::
-  if GetKeyState("Alt") {
-    SetTransparent(30)
-    return
-  }
-Return
-CapsLock & 4::
-  if GetKeyState("Alt") {
-    SetTransparent(40)
-    return
-  }
-  if GetKeyState("Shift") {
-    Send +{End} ; Add Selection
-    return
-  }
-  Send {End} ; Move to line end (VIM: SHIFT+$)
-Return
-CapsLock & 5::
-  if GetKeyState("Alt") {
-    SetTransparent(50)
-    return
-  }
-Return
-CapsLock & 6::
-  if GetKeyState("Alt") {
-    SetTransparent(60)
-    return
-  }
-  if GetKeyState("Shift") {
-    Send +{Home} ; Add Selection
-    return
-  }
-  Send {Home} ; Move to line begin (VIM: SHIFT+^)
-Return
-CapsLock & 7::
-  if GetKeyState("Alt") {
-    SetTransparent(70)
-    return
-  }
-Return
+CapsLock & `::SetTransparent(0)
+CapsLock & 1::SetTransparent(10)
+CapsLock & 2::SetTransparent(20)
+CapsLock & 3::SetTransparent(30)
+CapsLock & 4::SetTransparent(40)
+CapsLock & 5::SetTransparent(50)
+CapsLock & 6::SetTransparent(60)
+CapsLock & 7::SetTransparent(70)
 CapsLock & 8::
   if GetKeyState("Alt") {
-    SetTransparent(80)
+    GeneratePassword(20)
     return
   }
-  length = 12
   if GetKeyState("Shift") {
-    GeneratePassword(length, true)
+    GeneratePassword(20, true)
     return
   }
-  GeneratePassword(length)
+  SetTransparent(80)
 Return
-CapsLock & 9::
-  if GetKeyState("Alt") {
-    SetTransparent(90)
-    return
-  }
-Return
-CapsLock & 0::
-  if GetKeyState("Alt") {
-    SetTransparent(100)
-    return
-  }
-Return
+CapsLock & 9::SetTransparent(90)
+CapsLock & 0::SetTransparent(100)
+
 CapsLock & Left::Send #{Left} ; WIN+LEFT
 CapsLock & Down::Send #{Down} ; WIN+DOWN
 CapsLock & Up::Send #{Up} ; WIN+UP
 CapsLock & Right::Send #{Right} ; WIN+RIGHT
 ; capslock + key
-CapsLock & Space::SendInput {Space 4} ; Input 4 space
-CapsLock & H::
-  if GetKeyState("Shift") {
-    Send +{Left} ; Add Selection
-    return
-  }
-  Send {Left} ; Move left (VIM: h)
-Return
-CapsLock & J::
-  if GetKeyState("Shift") {
-    Send +{Down} ; Add Selection
-    return
-  }
-  Send {Down} ; Move down (VIM: j)
-Return
-CapsLock & K::
-  if GetKeyState("Shift") {
-    Send +{Up} ; Add Selection
-    return
-  }
-  Send {Up} ; Move up (VIM: k)
-Return
-CapsLock & L::
-  if GetKeyState("Shift") {
-    Send +{Right} ; Add Selection
-    return
-  }
-  Send {Right} ; Move right (VIM: l)
-Return
-CapsLock & N::
-  if GetKeyState("Shift") {
-    Send +{Down} ; Add Selection
-    return
-  }
-  Send {Down} ; Move down too (VIM: CTRL+N)
-Return
-CapsLock & P::
-  if GetKeyState("Shift") {
-    Send +{Up} ; Add Selection
-    return
-  }
-  Send {Up} ; Move up too (VIM: CTRL+P)
-Return
+CapsLock & Space::Send ^{Space}
 CapsLock & B::
   if GetKeyState("Shift") {
-    Send +{PgUp} ; Add Selection
+    Send +{Left}
     return
   }
-  Send {PgUp} ; previous page. (VIM: CTRL+B)
+  Send {Left} ; Move back (Emacs: CTRL+B)
 Return
 CapsLock & F::
   if GetKeyState("Shift") {
-    Send +{PgDn} ; Add Selection
+    Send +{Right}
     return
   }
-  Send {PgDn} ; next page. (VIM: CTRL+F)
+  Send {Right} ; Move front (Emacs: CTRL+F)
 Return
-CapsLock & G::
+CapsLock & N::
   if GetKeyState("Shift") {
-    Send ^{End} ; Goto page head. (VIM: SHIFT+G)
+    Send +{Down}
     return
   }
-  Send ^{Home} ; Goto page foot. (VIM: gg)
+  Send {Down} ; Move next (Emacs: CTRL+N)
+Return
+CapsLock & P::
+  if GetKeyState("Shift") {
+    Send +{Up}
+    return
+  }
+  Send {Up} ; Move previous (Emacs: CTRL+P)
+Return
+CapsLock & A::
+  if GetKeyState("Shift") {
+    Send +{Home}
+    return
+  }
+  Send {Home} ; Move ahead (Emacs: CTRL+A)
+Return
+CapsLock & E::
+  if GetKeyState("Shift") {
+    Send ^{End}
+    return
+  }
+  Send ^{End} ; Move end (Emacs: CTRL+E)
 Return
 CapsLock & Enter::Send {End}{Enter} ; Start new line
 CapsLock & \::Send {Home}{Enter}{Up} ; Start new line at previous line
@@ -301,40 +216,37 @@ CapsLock & RShift::Send {Enter}{Left} ; Line split
 CapsLock & Backspace::Send +{Home}{Backspace} ; Delete to line begin
 CapsLock & Delete::Send +{End}{Backspace} ; Delete to line end
 CapsLock & D::Send {Home}+{End}^c{End}{Enter}^v{Home 2} ; Duplicate line
-CapsLock & A::Send {Home}+{End} ; Selected current line
+CapsLock & W::Send {End}+{Home} ; Selected current line
 CapsLock & C::Send {End}+{Home}^c ; Selected and Copy current line
-CapsLock & X::Send {End}+{Home 2}^x{Delete} ; Cut current line
+CapsLock & X::Send {End}+{Home}^x+{Home}{Delete 2} ; Cut current line
 CapsLock & V::Send {Home}{Enter}{Up}^v ; Paste to current line
 CapsLock & Insert:: ; Paste plain text
   clipboard = %clipboard%
   Send ^v
 Return
 ; function key
-CapsLock & F1::
-  if GetKeyState("Shift") {
-    ListHotkeys ; Show ListHotKeys window.
-    return
-  }
-  RunNewInstance("help")
-Return
+CapsLock & F1::RunNewInstance("help")
 CapsLock & F2::
   if GetKeyState("Shift") {
+    WinSet, AlwaysOnTop, On, A
+    return
+  }
+  if GetKeyState("Alt") {
     WinSet, AlwaysOnTop, Off, A
     return
   }
-  WinSet, AlwaysOnTop, On, A
-  ;WinSet, AlwaysOnTop, Toggle, A    ; bring current window to TopMost
+  WinSet, AlwaysOnTop, Toggle, A ; bring current window to TopMost
 Return
-CapsLock & F3::RunRun("C:\Program Files\Listary\Listary.exe") ; Run Listary
-CapsLock & F4::RunRun("C:\Tools\Everything\Everything.exe") ; Run Everything
-CapsLock & F5::RunRun("pageant.exe")
-CapsLock & F6::RunRun("puttygen.exe")
-CapsLock & F7::RunRunCmdAndClose("psftp.exe")
-CapsLock & F8::RunRun("putty.exe")
-CapsLock & F9::RunRunPowershell() ; Run PowerShell
-CapsLock & F10::RunRunCmd("ver") ; Run cmd
-CapsLock & F11::RunRunGit() ; Run git-bash
-CapsLock & F12::RunRunBashOrMSYS()
+CapsLock & F3::RunAdvanced("C:\Program Files\Listary\Listary.exe") ; Run Listary
+CapsLock & F4::RunAdvanced("C:\Tools\Everything.exe") ; Run Everything
+CapsLock & F5::RunAdvanced("pageant.exe")
+CapsLock & F6::RunAdvanced("puttygen.exe")
+CapsLock & F7::RunCmdAndCloseAdvanced("psftp.exe")
+CapsLock & F8::RunAdvanced("putty.exe")
+CapsLock & F9::RunWtOrPowerShell() ; Run PowerShell
+CapsLock & F10::RunCmdAdvanced("ver") ; Run cmd
+CapsLock & F11::RunBash()
+CapsLock & F12::RunGit() ; Run git-bash
 
 ; ## Hotstrings ##
 :*:]date::
@@ -376,11 +288,11 @@ Return
 ; ## functions ##
 ShowHelp() {
   title=%my_name% %my_version% %my_bit%bit
-  msg=CapsLock+Shift+Esc Visit github`nCapsLock+Esc Restart %my_name%`nCapsLock+Alt+[``~0] Set current window tranparent to 0`%-100`%.`nCapsLock+Shift+Fn Run xxx as administrator.`n`nCapsLock+F1 Show this.`t+Shift Show ListHotKeys window.`nCapsLock+F2 Current window always on top.`t+Shift turn off.`nCapsLock+F3 Run Listary.`nCapsLock+F4 Run Everything.`n`nCapsLock+F5 Run pageant.`nCapsLock+F6 Run puttygen.`nCapsLock+F7 Run psftp.`nCapsLock+F8 Run putty.`n`nCapsLock+F9 Run Powershell.`nCapsLock+F10 Run CMD.`nCapsLock+F11 Run Git shell.`nCapsLock+F12 Run Bash shell(WSL)/MSYS2.`t+Shift Run MSYS2.`n`nWin+F1 Show WinX menu.`nWin+F2 Show Run dialog.`nWin+F3 Show Desktop.`nWin+F10 Mute.`nWin+F11 Volume down.`nWin+F12 Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
+  msg=CapsLock+Esc Goto homepage.`nCapsLock+[``1234567890] Set current window tranparent to 0`%-100`%.`n`nCapsLock+Shift+F1~F12 Run xxx as administrator.`n`nCapsLock+F1 Show this.`nCapsLock+F2 Toggle window to topmost. +Alt/Shift turn off/on.`nCapsLock+F3 Run Listary.`nCapsLock+F4 Run Everything.`n`nCapsLock+F5 Run pageant.`nCapsLock+F6 Run puttygen.`nCapsLock+F7 Run psftp.`nCapsLock+F8 Run putty.`n`nCapsLock+F9 Run Windows Terminal or Powershell.`nCapsLock+F10 Run CMD.`nCapsLock+F11 Run Bash shell(WSL).`nCapsLock+F12 Run Git shell.`n`nWin+F1 Show WinX menu.`nWin+F2 Show Run dialog.`nWin+F3 Show Desktop.`nWin+F10 Mute.`nWin+F11 Volume down.`nWin+F12 Volume up.`n`nHot strings`n]now`t]time`t]date`t]longdate`t
   MsgBox ,,%title%,%msg%,
 }
 
-RunRun(command)
+RunAdvanced(command)
 {
   try {
     if GetKeyState("Shift") && not A_IsAdmin {
@@ -391,7 +303,7 @@ RunRun(command)
   }
 }
 
-RunRunCmd(command)
+RunCmdAdvanced(command)
 {
   try {
     curPath := CurrentPath()
@@ -403,7 +315,7 @@ RunRunCmd(command)
   }
 }
 
-RunRunCmdAndClose(command)
+RunCmdAndCloseAdvanced(command)
 {
   try {
     curPath := CurrentPath()
@@ -415,7 +327,7 @@ RunRunCmdAndClose(command)
   }
 }
 
-RunRunPowershell()
+RunPowershell()
 {
   try {
     curPath := CurrentPath()
@@ -427,61 +339,53 @@ RunRunPowershell()
   }
 }
 
-RunRunGit()
+RunWtOrPowerShell()
 {
-  if FileExist("C:\Program Files\Git\git-bash.exe")
-  {
-    RunRun("""C:\Program Files\Git\git-bash.exe"" ""--cd=" . CurrentPath() . ".""")
+  try{
+    curPath := CurrentPath()
+    EnvGet, OutputVar, UserProfile
+    OutputVar = %OutputVar%\AppData\Local\Microsoft\WindowsApps\wt.exe
+    if FileExist(OutputVar){
+      if GetKeyState("Shift") {
+        Run *RunAs %OutputVar%, %curPath%
+        Return
+      }
+      Run %OutputVar%, %curPath%
+      Return
+    }
   }
-  else if FileExist("D:\Program Files\Git\git-bash.exe")
-  {
-    RunRun("""D:\Program Files\Git\git-bash.exe"" ""--cd=" . CurrentPath() . ".""")
-  }
-  else
-  {
-    MsgBox ,,AHK,Sorry`, git-bash.exe don't exist.,3
-  }
+  RunPowershell()
 }
 
-RunRunBashOrMSYS()
+RunGit()
 {
-  try {
-    if GetKeyState("Shift") {
-      if FileExist("C:\msys64\usr\bin\mintty.exe")
-      {
-        RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64", true)
-      }
-      else if FileExist("C:\msys32\usr\bin\mintty.exe")
-      {
-        RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32", true)
-      }
-      else
-      {
-        MsgBox ,,AHK,Sorry`, mintty.exe don't exist.,3
-      }
-      return
-    }
-
-    if FileExist("C:\Windows\System32\bash.exe")
+  try{
+    EnvGet, OutputVar, ProgramFiles
+    OutputVar = %OutputVar%\Git\git-bash.exe
+    if FileExist(OutputVar)
     {
-      RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login") ; Run bash shell in win10 amd64
-    }
-    else if FileExist("C:\Windows\sysnative\bash.exe")
-    {
-      RunCmdAndClose("""C:\Windows\sysnative\bash.exe"" --login") ; Run bash shell in win10 x86
-    }
-    else if FileExist("C:\msys64\usr\bin\mintty.exe")
-    {
-      RunMSYS2("C:\msys64\usr\bin\mintty.exe", "MINGW64")
-    }
-    else if FileExist("C:\msys32\usr\bin\mintty.exe")
-    {
-      RunMSYS2("C:\msys32\usr\bin\mintty.exe", "MINGW32")
+      RunAdvanced("""" . OutputVar """ --cd=""" . CurrentPath() . """")
     }
     else
     {
-      MsgBox ,,AHK,Sorry`, bash.exe or mintty.exe don't exist.,3
+      MsgBox ,,AHK,Sorry`, git-bash.exe don't exist.,3
     }
+  }
+}
+
+RunBash()
+{
+  if FileExist("C:\Windows\System32\bash.exe")
+  {
+    RunCmdAndClose("""C:\Windows\System32\bash.exe"" --login") ; Run bash shell in win10 amd64
+  }
+  else if FileExist("C:\Windows\sysnative\bash.exe")
+  {
+    RunCmdAndClose("""C:\Windows\sysnative\bash.exe"" --login") ; Run bash shell in win10 x86
+  }
+  else
+  {
+    MsgBox ,,AHK,Sorry`, bash.exe or mintty.exe don't exist.,3
   }
 }
 
