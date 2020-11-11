@@ -8,7 +8,7 @@
 SetWorkingDir, %A_ScriptDir%
 
 global my_name := "MacHotKey"
-global my_version := "v0.3.0"
+global my_version := "v0.3.1"
 global my_bit := A_PtrSize * 8
 global my_website := "https://github.com/m2nlight/AHKShortcutLikeMac"
 
@@ -205,10 +205,10 @@ CapsLock & A::
 Return
 CapsLock & E::
   if GetKeyState("Shift") {
-    Send ^{End}
+    Send +{End}
     return
   }
-  Send ^{End} ; Move end (Emacs: CTRL+E)
+  Send {End} ; Move end (Emacs: CTRL+E)
 Return
 CapsLock & Enter::Send {End}{Enter} ; Start new line
 CapsLock & \::Send {Home}{Enter}{Up} ; Start new line at previous line
